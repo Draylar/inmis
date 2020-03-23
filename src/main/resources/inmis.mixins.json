@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "draylar.inmis.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "ItemStackMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

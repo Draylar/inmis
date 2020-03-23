@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "inmis",
+  "version": "${version}",
+  "name": "Inmis",
+  "description": "I need more inventory space!",
+  "authors": [
+    "Draylar"
+  ],
+  "license": "MIT",
+  "icon": "assets/inmis/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "draylar.inmis.Inmis"
+    ],
+    "client": [
+      "draylar.inmis.InmisClient"
+    ]
+  },
+  "mixins": [
+    "inmis.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.7.8+build.186",
+    "fabric": "*",
+    "minecraft": "1.15.2"
+  }
+}
