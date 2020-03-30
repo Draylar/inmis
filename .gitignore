@@ -1,3 +1,6 @@
 # Project exclude paths
 /.gradle/
 /build/
+/.idea/
+/run/
+/Inmis.iml
