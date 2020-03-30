@@ -55,10 +55,8 @@ dependencies {
     include "com.github.CottonMC:UniversalComponents:1b5a66a176"
 
     // go cornmit jij
-    modImplementation "com.github.NerdHubMC:Cardinal-Components-API:${project.cardinal_components_version}"
-    include "com.github.NerdHubMC:Cardinal-Components-API:${project.cardinal_components_version}"
-    modCompile "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
-    include "com.github.NerdHubMC.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+    modCompile "com.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+    include "com.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 }
 
 processResources {
