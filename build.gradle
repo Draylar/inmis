@@ -47,8 +47,8 @@ dependencies {
     include "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
 
     // spinbgery by draylarr
-    modCompile "com.github.Draylar:Spinnery:1.15.2-SNAPSHOT"
-    include "com.github.Draylar:Spinnery:1.15.2-SNAPSHOT"
+    modCompile "com.github.vini2003:Spinnery:1.15.2-SNAPSHOT"
+    include "com.github.vini2003:Spinnery:1.15.2-SNAPSHOT"
 
     // bob's cardinal components 2
     modImplementation "com.github.CottonMC:UniversalComponents:1b5a66a176"
