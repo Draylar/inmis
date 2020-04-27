@@ -11,6 +11,9 @@ import spinnery.common.BaseContainer;
 import spinnery.widget.WAbstractWidget;
 import spinnery.widget.WInterface;
 import spinnery.widget.WSlot;
+import spinnery.widget.api.Action;
+
+import java.util.Iterator;
 
 public class BackpackContainer extends BaseContainer {
 
@@ -49,6 +52,17 @@ public class BackpackContainer extends BaseContainer {
 
                 if(slot.getStack().getItem() instanceof BackpackItem) {
                     ((WSlot) widget).setLocked(true);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onSlotAction(int slotNumber, int inventoryNumber, int button, Action action, PlayerEntity player) {
+        for (WAbstractWidget widget : this.serverInterface.getAllWidgets()) {
+            if (widget instanceof WSlot && ((WSlot) widget).getSlotNumber() == slotNumber && ((WSlot) widget).getInventoryNumber() == inventoryNumber) {
+                if (!(((WSlot) widget).getStack().getItem() instanceof BackpackItem)) {
+                    super.onSlotAction(slotNumber, inventoryNumber, button, action, player);
                 }
             }
         }
