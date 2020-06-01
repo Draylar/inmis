@@ -27,8 +27,9 @@ repositories {
         url = "https://maven.onyxstudios.dev"
     }
 
+    maven { url = "http://server.bbkr.space:8082/artifactory/libs-release" }
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
-    maven { url 'https://jitpack.io' }
+    maven { url = 'https://jitpack.io' }
 }
 
 dependencies {
@@ -52,8 +53,8 @@ dependencies {
     include "com.github.vini2003:spinnery:${project.spinnery_version}"
 
     // bob's cardinal components 2
-    modImplementation "com.github.CottonMC:UniversalComponents:1b5a66a176"
-    include "com.github.CottonMC:UniversalComponents:1b5a66a176"
+    modImplementation "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
+    include "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
 
     // go cornmit jij
     modCompile "com.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
