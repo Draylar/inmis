@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.2.6-SNAPSHOT'
+    id 'fabric-loom' version '0.4.5'
     id 'maven-publish'
 }
 
@@ -14,7 +14,6 @@ minecraft {
 }
 
 repositories {
-    maven { url 'https://jitpack.io' }
     maven {
         name = "Spinnery"
         url  "https://dl.bintray.com/spinnery/Spinnery"
@@ -27,7 +26,9 @@ repositories {
         name = "Onyx Studios"
         url = "https://maven.onyxstudios.dev"
     }
+
     maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
