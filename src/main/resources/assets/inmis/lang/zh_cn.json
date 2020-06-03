@@ -1,0 +1,15 @@
+{
+  "itemGroup.inmis.backpack": "Inmis",
+
+  "ui.inmis.backpack": "背包",
+
+  "item.inmis.baby_backpack": "Baby背包",
+  "item.inmis.ender_pouch": "末影背包",
+
+  "item.inmis.frayed_backpack": "皮革背包",
+  "item.inmis.plated_backpack": "铁背包",
+  "item.inmis.gilded_backpack": "金背包",
+  "item.inmis.bejeweled_backpack": "宝石背包",
+  "item.inmis.withered_backpack": "凋零背包",
+  "item.inmis.endless_backpack": "终界背包"
+}
