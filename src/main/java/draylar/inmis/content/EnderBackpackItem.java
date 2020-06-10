@@ -1,12 +1,12 @@
 package draylar.inmis.content;
 
 import draylar.inmis.Inmis;
-import net.minecraft.container.GenericContainer;
-import net.minecraft.container.SimpleNamedContainerFactory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
@@ -27,8 +27,8 @@ public class EnderBackpackItem extends Item {
 
         if (enderChestInventory != null) {
             if (!world.isClient) {
-                player.openContainer(new SimpleNamedContainerFactory((i, playerInventory, playerEntity) ->
-                        GenericContainer.createGeneric9x3(i, playerInventory, enderChestInventory), CONTAINER_NAME));
+                player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
+                        GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory), CONTAINER_NAME));
 
                 player.incrementStat(Stats.OPEN_ENDERCHEST);
             }

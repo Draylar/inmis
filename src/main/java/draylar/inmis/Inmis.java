@@ -28,14 +28,14 @@ public class Inmis implements ModInitializer {
     @Override
     public void onInitialize() {
         ContainerProviderRegistry.INSTANCE.registerFactory(CONTAINER_ID, BackpackContainer::new);
-        Registry.ITEM.add(id("ender_pouch"), new EnderBackpackItem());
+        Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());
 
         setupInventoryComponents();
     }
 
     private void setupInventoryComponents() {
         for (BackpackInfo backpack : Inmis.CONFIG.backpacks) {
-            Item item = Registry.ITEM.add(new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack));
+            Item item = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack));
             ItemComponentCallback.event(item).register((stack, componentContainer) ->
                     componentContainer.put(UniversalComponents.INVENTORY_COMPONENT, new ItemInventoryComponent(backpack.getNumberOfRows() * backpack.getRowWidth())));
         }
