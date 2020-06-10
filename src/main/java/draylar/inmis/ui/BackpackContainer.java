@@ -7,13 +7,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.PacketByteBuf;
-import spinnery.common.BaseContainer;
+import spinnery.common.container.BaseContainer;
 import spinnery.widget.WAbstractWidget;
 import spinnery.widget.WInterface;
 import spinnery.widget.WSlot;
 import spinnery.widget.api.Action;
-
-import java.util.Iterator;
 
 public class BackpackContainer extends BaseContainer {
 
