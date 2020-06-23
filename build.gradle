@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.4.5'
+    id 'fabric-loom' version '0.4.29'
     id 'maven-publish'
 }
 
@@ -7,7 +7,7 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 archivesBaseName = project.archives_base_name
-version = project.mod_version
+version = project.mod_version + "-" + project.minecraft_version
 group = project.maven_group
 
 minecraft {
@@ -54,12 +54,12 @@ dependencies {
     include "com.github.vini2003:spinnery:${project.spinnery_version}"
 
     // bob's cardinal components 2
-    modImplementation "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
+    modCompile "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
     include "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
 
     // go cornmit jij
-    modCompile "com.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
-    include "com.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+    modCompile "io.github.OnyxStudios:Cardinal-Components-API:${project.cardinal_components_version}"
+    include "io.github.OnyxStudios:Cardinal-Components-API:${project.cardinal_components_version}"
 }
 
 processResources {
