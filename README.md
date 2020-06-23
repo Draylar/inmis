@@ -21,7 +21,7 @@ Inmis is a backpack mod! It provides a progression ladder of 6 backpack types, p
 
 ### Installation
 
-Inmis is a 1.15.2 mod built for the [Fabric Loader](https://fabricmc.net/). It requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to be installed separately; all other dependencies are installed with the mod. 
+Inmis is a mod built for the [Fabric Loader](https://fabricmc.net/). It requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to be installed separately; all other dependencies are installed with the mod. 
 
 ### License
 
