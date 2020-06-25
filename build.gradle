@@ -59,7 +59,8 @@ dependencies {
 
     // go cornmit jij
     modCompile "io.github.OnyxStudios:Cardinal-Components-API:${project.cardinal_components_version}"
-    include "io.github.OnyxStudios:Cardinal-Components-API:${project.cardinal_components_version}"
+    include "io.github.OnyxStudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+    include "io.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 }
 
 processResources {
