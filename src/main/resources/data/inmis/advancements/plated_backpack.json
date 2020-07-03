@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "Leveling Up"
+        },
+        "description": {
+            "text": "Surround your Frayed Backpack with Iron Ingots to expand its storage capabilities."
+        },
+        "icon": {
+            "item": "inmis:plated_backpack"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:plated_backpack"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:frayed_backpack"
+}

@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "Gilded Expansions"
+        },
+        "description": {
+            "text": "Enhance your Plated Backpack by plating it with gold. Shiny!"
+        },
+        "icon": {
+            "item": "inmis:gilded_backpack"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:gilded_backpack"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:plated_backpack"
+}

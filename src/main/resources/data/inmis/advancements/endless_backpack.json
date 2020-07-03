@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "The End"
+        },
+        "description": {
+            "text": "Obtain the ultimate backpack, fueled by the power of The End."
+        },
+        "icon": {
+            "item": "inmis:endless_backpack"
+        },
+        "frame": "challenge",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:endless_backpack"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:withered_backpack"
+}

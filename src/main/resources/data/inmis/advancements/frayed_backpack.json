@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "Backpack Beginnings"
+        },
+        "description": {
+            "text": "It's not much, but it's mine! Craft a Frayed Backpack to expand your inventory space."
+        },
+        "icon": {
+            "item": "inmis:frayed_backpack"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:frayed_backpack"
+                    }
+                ]
+            }
+        }
+    }
+}

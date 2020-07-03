@@ -1,0 +1,31 @@
+{
+    "display": {
+        "title": {
+            "text": "Ender Access"
+        },
+        "description": {
+            "text": "Sticking your hand inside this bag makes it appear inside your Enderchest..."
+        },
+        "icon": {
+            "item": "inmis:ender_pouch"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": true,
+        "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:ender_pouch"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:frayed_backpack"
+}

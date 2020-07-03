@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "Withering Expanse"
+        },
+        "description": {
+            "text": "Enhance your shiny backpack with a trophy obtained by the desolate king."
+        },
+        "icon": {
+            "item": "inmis:withered_backpack"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:withered_backpack"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:bejeweled_backpack"
+}

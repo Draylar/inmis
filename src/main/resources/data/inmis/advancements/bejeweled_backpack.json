@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "Cover Me With Various Gems"
+        },
+        "description": {
+            "text": "Stick some rare gems on your Gilded Backpack to make it even shinier!"
+        },
+        "icon": {
+            "item": "inmis:bejeweled_backpack"
+        },
+        "frame": "task",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:bejeweled_backpack"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:gilded_backpack"
+}
