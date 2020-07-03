@@ -34,9 +34,9 @@ public class BackpackContainerScreen extends BaseContainerScreen<BackpackContain
 
             mainPanel.createChild(WStaticText::new).setText(new TranslatableText("item.inmis." + backpackItem.getTier().getName() + "_backpack")).setPosition(Position.of(mainPanel, 8, 6, 0));
 
-            WSlot.addArray(Position.of(mainPanel, containerWidth / 2 - (SLOT_SIZE * backpackItem.getTier().getRowWidth()) / 2, 18, 1), Size.of(SLOT_SIZE, SLOT_SIZE), mainInterface, 0, BackpackContainer.BACKPACK_INVENTORY, backpackItem.getTier().getRowWidth(), backpackItem.getTier().getNumberOfRows());
+            WSlot.addArray(Position.of(mainPanel, containerWidth / 2 - (SLOT_SIZE * backpackItem.getTier().getRowWidth()) / 2, 17, 1), Size.of(SLOT_SIZE, SLOT_SIZE), mainInterface, 0, BackpackContainer.BACKPACK_INVENTORY, backpackItem.getTier().getRowWidth(), backpackItem.getTier().getNumberOfRows());
             WSlot.addPlayerInventory(Position.of(mainPanel, containerWidth / 2 - (SLOT_SIZE * 9) / 2, INVENTORY_LABEL_EXTRA + backpackItem.getTier().getNumberOfRows() * SLOT_SIZE + TOP_OFFSET, 1), Size.of(18, 18), mainInterface);
-            mainPanel.createChild(WStaticText::new).setText(new TranslatableText("key.categories.inventory")).setPosition(Position.of(mainPanel, containerWidth / 2 - (SLOT_SIZE * 9) / 2, backpackItem.getTier().getNumberOfRows() * SLOT_SIZE + TOP_OFFSET - 4));
+            mainPanel.createChild(WStaticText::new).setText(new TranslatableText("key.categories.inventory")).setPosition(Position.of(mainPanel, containerWidth / 2 - (SLOT_SIZE * 9) / 2, backpackItem.getTier().getNumberOfRows() * SLOT_SIZE + TOP_OFFSET - 3));
         }
     }
 }
