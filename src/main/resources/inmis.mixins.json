@@ -3,7 +3,7 @@
   "package": "draylar.inmis.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "CraftingTableContainerMixin"
+    "ShapedRecipeMixin"
   ],
   "client": [
     "ItemStackMixin"
