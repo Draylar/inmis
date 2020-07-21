@@ -1,0 +1,30 @@
+{
+    "display": {
+        "title": {
+            "text": "Fiery Alternatives"
+        },
+        "description": {
+            "text": "Plate your backpack with Netherite to make it immune to fire & lava."
+        },
+        "icon": {
+            "item": "inmis:blazing_backpack"
+        },
+        "frame": "goal",
+        "show_toast": true,
+        "announce_to_chat": true,
+        "hidden": false
+    },
+    "criteria": {
+        "backpack": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "inmis:blazing_backpack"
+                    }
+                ]
+            }
+        }
+    },
+    "parent": "inmis:bejeweled_backpack"
+}

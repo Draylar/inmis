@@ -40,7 +40,7 @@ dependencies {
 
     // dev modmenu & REI
     modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
-    modCompile 'me.shedaniel:RoughlyEnoughItems:4.4.2'
+    modCompile 'me.shedaniel:RoughlyEnoughItems:4.10.2'
 
     // config
     modCompile "me.shedaniel.cloth:config-2:${project.cloth_config_version}"
@@ -63,7 +63,7 @@ dependencies {
     include "io.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 
     // testing with improved stations for backpack nbt transferring
-    modImplementation 'com.github.shedaniel:improved-stations:master-SNAPSHOT'
+//    modImplementation 'com.github.shedaniel:improved-stations:master-SNAPSHOT'
 }
 
 processResources {

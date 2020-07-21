@@ -15,8 +15,8 @@ public class BackpackItem extends Item {
 
     private final BackpackInfo backpack;
 
-    public BackpackItem(BackpackInfo backpack) {
-        super(new Item.Settings().group(Inmis.GROUP).maxCount(1));
+    public BackpackItem(BackpackInfo backpack, Item.Settings settings) {
+        super(settings);
         this.backpack = backpack;
     }
 

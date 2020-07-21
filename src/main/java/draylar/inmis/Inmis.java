@@ -35,7 +35,15 @@ public class Inmis implements ModInitializer {
 
     private void setupInventoryComponents() {
         for (BackpackInfo backpack : Inmis.CONFIG.backpacks) {
-            Item item = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack));
+            Item.Settings settings = new Item.Settings().group(Inmis.GROUP).maxCount(1);
+
+            // setup fireproof item settings
+            if(backpack.isFireImmune()) {
+                settings.fireproof();
+            }
+
+            // register backpack
+            Item item = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
             ItemComponentCallback.event(item).register((stack, componentContainer) ->
                     componentContainer.put(UniversalComponents.INVENTORY_COMPONENT, new ItemInventoryComponent(backpack.getNumberOfRows() * backpack.getRowWidth())));
         }
