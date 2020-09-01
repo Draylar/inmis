@@ -1,10 +1,10 @@
 {
     "display": {
         "title": {
-            "text": "Goody Bag"
+            "translate": "inmis.advancement.baby_backpack.title"
         },
         "description": {
-            "text": "Perfect for party gifts!"
+            "translate": "inmis.advancement.baby_backpack.description"
         },
         "icon": {
             "item": "inmis:baby_backpack"

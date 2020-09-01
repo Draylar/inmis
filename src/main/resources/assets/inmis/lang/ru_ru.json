@@ -1,0 +1,16 @@
+{
+  "itemGroup.inmis.backpack": "Inmis",
+
+  "ui.inmis.backpack": "Рюкзак",
+
+  "item.inmis.baby_backpack": "Маленький Рюкзак",
+  "item.inmis.ender_pouch": "Сумка Края",
+
+  "item.inmis.frayed_backpack": "Изношеный Рюкзак",
+  "item.inmis.plated_backpack": "Железный Рюкзак",
+  "item.inmis.gilded_backpack": "Золотой Рюкзак",
+  "item.inmis.bejeweled_backpack": "Алмазный Рюкзак",
+  "item.inmis.blazing_backpack": "Пылающий Рюкзак",
+  "item.inmis.withered_backpack": "Визер Рюкзак",
+  "item.inmis.endless_backpack": "Рюкзак Края"
+}
