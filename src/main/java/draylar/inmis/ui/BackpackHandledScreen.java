@@ -30,6 +30,7 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         this.backgroundWidth = dimension.width;
         this.backgroundHeight = dimension.height;
         this.titleY = 7;
+        this.playerInventoryTitleX = handler.getPlayerInvSlotPosition(dimension, 0, 0).x;
         this.playerInventoryTitleY = this.backgroundHeight - 94;
     }
     
