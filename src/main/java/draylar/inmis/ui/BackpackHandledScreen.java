@@ -38,7 +38,7 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
-        render(matrices, new Rectangle(x, y, backgroundWidth, backgroundHeight), delta, 0xFFFFFFFF);
+        renderBackgroundTexture(matrices, new Rectangle(x, y, backgroundWidth, backgroundHeight), delta, 0xFFFFFFFF);
         this.client.getTextureManager().bindTexture(new Identifier("textures/gui/container/hopper.png"));
         for (Slot slot : getScreenHandler().slots) {
             this.drawTexture(matrices, x + slot.x - 1, y + slot.y - 1, 43, 19, 18, 18);
@@ -52,7 +52,7 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
     }
     
-    public void render(MatrixStack matrices, Rectangle bounds, float delta, int color) {
+    public void renderBackgroundTexture(MatrixStack matrices, Rectangle bounds, float delta, int color) {
         float alpha = ((color >> 24) & 0xFF) / 255f;
         float red = ((color >> 16) & 0xFF) / 255f;
         float green = ((color >> 8) & 0xFF) / 255f;
