@@ -15,21 +15,20 @@ minecraft {
 
 repositories {
     maven {
-        name = "Spinnery"
-        url  "https://dl.bintray.com/spinnery/Spinnery"
-    }
-    maven {
-        name = "FabricMC"
-        url = "https://maven.fabricmc.net/"
-    }
-    maven {
-        name = "Onyx Studios"
-        url = "https://maven.onyxstudios.dev"
+        name = "Ladysnake Libs"
+        url = "https://dl.bintray.com/ladysnake/libs"
+        content {
+            includeGroup "io.github.onyxstudios"
+            includeGroup "io.github.onyxstudios.Cardinal-Components-API"
+        }
     }
 
-    maven { url = "http://server.bbkr.space:8082/artifactory/libs-release" }
-    maven { url = 'http://maven.sargunv.s3-website-us-west-2.amazonaws.com/' }
-    maven { url = 'https://jitpack.io' }
+    maven { 
+        url = "https://server.bbkr.space/artifactory/libs-release"
+        content {
+            includeGroup "io.github.cottonmc"
+        }
+    }
 }
 
 dependencies {
@@ -40,7 +39,7 @@ dependencies {
 
     // dev modmenu & REI
     modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
-    modCompile 'me.shedaniel:RoughlyEnoughItems:4.10.2'
+    modCompile 'me.shedaniel:RoughlyEnoughItems:5.2.10'
 
     // config
     modCompile "me.shedaniel.cloth:config-2:${project.cloth_config_version}"
@@ -49,18 +48,16 @@ dependencies {
     modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
 
-    // spinbgery by vini
-    modCompile "com.github.vini2003:spinnery:${project.spinnery_version}"
-    include "com.github.vini2003:spinnery:${project.spinnery_version}"
-
     // bob's cardinal components 2
-    modCompile "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
+    modCompile ("io.github.cottonmc:UniversalComponents:${project.universal_components_version}") {
+        exclude group: "io.github.OnyxStudios.Cardinal-Components-API"
+    }
     include "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
 
     // go cornmit jij
-    modCompile "io.github.OnyxStudios:Cardinal-Components-API:${project.cardinal_components_version}"
-    include "io.github.OnyxStudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-    include "io.github.OnyxStudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
+    modCompile "io.github.onyxstudios:Cardinal-Components-API:${project.cardinal_components_version}"
+    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
+    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
 
     // testing with improved stations for backpack nbt transferring
 //    modImplementation 'com.github.shedaniel:improved-stations:master-SNAPSHOT'
