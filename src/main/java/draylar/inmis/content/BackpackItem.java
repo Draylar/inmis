@@ -1,15 +1,21 @@
 package draylar.inmis.content;
 
-import draylar.inmis.Inmis;
 import draylar.inmis.config.BackpackInfo;
-import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import draylar.inmis.ui.BackpackScreenHandler;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class BackpackItem extends Item {
 
@@ -25,7 +31,22 @@ public class BackpackItem extends Item {
         user.setCurrentHand(hand);
 
         if(world != null && !world.isClient) {
-            ContainerProviderRegistry.INSTANCE.openContainer(Inmis.CONTAINER_ID, user, buf -> { });
+            user.openHandledScreen(new ExtendedScreenHandlerFactory() {
+                @Override
+                public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
+                    packetByteBuf.writeEnumConstant(hand);
+                }
+        
+                @Override
+                public Text getDisplayName() {
+                    return new TranslatableText(BackpackItem.this.getTranslationKey());
+                }
+        
+                @Override
+                public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+                    return new BackpackScreenHandler(syncId, inv, hand);
+                }
+            });
         }
 
         return TypedActionResult.success(user.getStackInHand(hand));
