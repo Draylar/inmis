@@ -7,6 +7,9 @@
   "authors": [
     "Draylar"
   ],
+  "contributors": [
+    "shedaniel"
+  ],
   "license": "MIT",
   "icon": "assets/inmis/icon.png",
   "environment": "*",
