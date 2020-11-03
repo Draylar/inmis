@@ -12,5 +12,8 @@
   "item.inmis.bejeweled_backpack": "Алмазный Рюкзак",
   "item.inmis.blazing_backpack": "Пылающий Рюкзак",
   "item.inmis.withered_backpack": "Визер Рюкзак",
-  "item.inmis.endless_backpack": "Рюкзак Края"
+  "item.inmis.endless_backpack": "Рюкзак Края",
+
+  "inmis.advancement.baby_backpack.title": "Прекрасный Рюкзак",
+  "inmis.advancement.baby_backpack.description": "Идеально подходит для подарков на вечеринку!"
 }
