@@ -3,23 +3,27 @@ package draylar.inmis.ui;
 import draylar.inmis.Inmis;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.content.BackpackItem;
-import io.github.cottonmc.component.UniversalComponents;
-import io.github.cottonmc.component.item.InventoryComponent;
+import draylar.inmis.util.InventoryUtils;
 import me.shedaniel.math.Dimension;
 import me.shedaniel.math.Point;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.Hand;
 
 public class BackpackScreenHandler extends ScreenHandler {
+
     public static final int BACKPACK_INVENTORY = 1;
     private PlayerEntity player;
     private Hand hand;
+    private ItemStack backpackStack;
     int padding = 8;
     int titleSpace = 10;
     
@@ -41,12 +45,22 @@ public class BackpackScreenHandler extends ScreenHandler {
     }
     
     private void setupContainer(PlayerInventory playerInventory, ItemStack backpackStack) {
-        InventoryComponent component = UniversalComponents.INVENTORY_COMPONENT.get(backpackStack);
-        Inventory inventory = component.asInventory();
         Dimension dimension = getDimension();
         BackpackInfo tier = getItem().getTier();
         int rowWidth = tier.getRowWidth();
         int numberOfRows = tier.getNumberOfRows();
+
+        ListTag tag = backpackStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+        SimpleInventory inventory = new SimpleInventory(rowWidth * numberOfRows) {
+            @Override
+            public void markDirty() {
+                backpackStack.getOrCreateTag().put("Inventory", InventoryUtils.toTag(this));
+                super.markDirty();
+            }
+        };
+
+        InventoryUtils.fromTag(tag, inventory);
+
         for (int y = 0; y < numberOfRows; y++) {
             for (int x = 0; x < rowWidth; x++) {
                 Point backpackSlotPosition = getBackpackSlotPosition(dimension, x, y);
@@ -85,7 +99,7 @@ public class BackpackScreenHandler extends ScreenHandler {
         BackpackInfo tier = getItem().getTier();
         return new Point(dimension.getWidth() / 2 - 9 * 9 + x * 18, dimension.getHeight() - padding - 4 * 18 - 3 + y * 18 + (y == 3 ? 4 : 0));
     }
-    
+
     @Override
     public boolean canUse(PlayerEntity player) {
         ItemStack stackInHand = player.getStackInHand(this.hand);
@@ -117,7 +131,7 @@ public class BackpackScreenHandler extends ScreenHandler {
         
         return itemStack;
     }
-    
+
     private class BackpackLockedSlot extends Slot {
         public BackpackLockedSlot(Inventory inventory, int index, int x, int y) {
             super(inventory, index, x, y);

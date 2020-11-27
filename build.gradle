@@ -47,20 +47,6 @@ dependencies {
 
     modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
-
-    // bob's cardinal components 2
-    modCompile ("io.github.cottonmc:UniversalComponents:${project.universal_components_version}") {
-        exclude group: "io.github.OnyxStudios.Cardinal-Components-API"
-    }
-    include "io.github.cottonmc:UniversalComponents:${project.universal_components_version}"
-
-    // go cornmit jij
-    modCompile "io.github.onyxstudios:Cardinal-Components-API:${project.cardinal_components_version}"
-    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-base:${project.cardinal_components_version}"
-    include "io.github.onyxstudios.Cardinal-Components-API:cardinal-components-item:${project.cardinal_components_version}"
-
-    // testing with improved stations for backpack nbt transferring
-//    modImplementation 'com.github.shedaniel:improved-stations:master-SNAPSHOT'
 }
 
 processResources {

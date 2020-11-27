@@ -5,11 +5,8 @@ import draylar.inmis.config.InmisConfig;
 import draylar.inmis.content.BackpackItem;
 import draylar.inmis.content.EnderBackpackItem;
 import draylar.inmis.ui.BackpackScreenHandler;
-import io.github.cottonmc.component.UniversalComponents;
-import io.github.cottonmc.component.item.impl.ItemInventoryComponent;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
-import nerdhub.cardinal.components.api.event.ItemComponentCallback;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
@@ -22,6 +19,8 @@ import net.minecraft.util.registry.Registry;
 
 public class Inmis implements ModInitializer {
 
+    // inv component id is universalcomponents:inventory
+
     public static final Identifier CONTAINER_ID = id("backpack");
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
     public static final InmisConfig CONFIG = AutoConfig.register(InmisConfig.class, GsonConfigSerializer::new).getConfig();
@@ -30,11 +29,10 @@ public class Inmis implements ModInitializer {
     @Override
     public void onInitialize() {
         Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());
-
-        setupInventoryComponents();
+        registerBackpacks();
     }
 
-    private void setupInventoryComponents() {
+    private void registerBackpacks() {
         for (BackpackInfo backpack : Inmis.CONFIG.backpacks) {
             Item.Settings settings = new Item.Settings().group(Inmis.GROUP).maxCount(1);
 
@@ -43,10 +41,7 @@ public class Inmis implements ModInitializer {
                 settings.fireproof();
             }
 
-            // register backpack
-            Item item = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
-            ItemComponentCallback.event(item).register((stack, componentContainer) ->
-                    componentContainer.put(UniversalComponents.INVENTORY_COMPONENT, new ItemInventoryComponent(backpack.getNumberOfRows() * backpack.getRowWidth())));
+            Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
         }
     }
 

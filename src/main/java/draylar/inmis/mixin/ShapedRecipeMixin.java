@@ -1,10 +1,12 @@
 package draylar.inmis.mixin;
 
 import draylar.inmis.content.BackpackItem;
-import io.github.cottonmc.component.UniversalComponents;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.recipe.ShapedRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,11 +33,8 @@ public abstract class ShapedRecipeMixin {
             ItemStack newBackpack = this.getOutput().copy();
 
             if(newBackpack.getItem() instanceof BackpackItem) {
-                // transfer CCA NBT data to new backpack
-                CompoundTag itemTag = new CompoundTag();
-                UniversalComponents.INVENTORY_COMPONENT.get(centerSlot).toTag(itemTag);
-                UniversalComponents.INVENTORY_COMPONENT.get(newBackpack).fromTag(itemTag);
-
+                ListTag oldTag = centerSlot.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+                newBackpack.getOrCreateTag().put("Inventory", oldTag);
                 cir.setReturnValue(newBackpack);
             }
         }
