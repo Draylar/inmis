@@ -14,21 +14,7 @@ minecraft {
 }
 
 repositories {
-    maven {
-        name = "Ladysnake Libs"
-        url = "https://dl.bintray.com/ladysnake/libs"
-        content {
-            includeGroup "io.github.onyxstudios"
-            includeGroup "io.github.onyxstudios.Cardinal-Components-API"
-        }
-    }
 
-    maven { 
-        url = "https://server.bbkr.space/artifactory/libs-release"
-        content {
-            includeGroup "io.github.cottonmc"
-        }
-    }
 }
 
 dependencies {
