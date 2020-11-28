@@ -3,37 +3,43 @@ package draylar.inmis.content;
 import draylar.inmis.Inmis;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
+import net.minecraft.inventory.container.ChestContainer;
+import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.GenericContainerScreenHandler;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
-import net.minecraft.stat.Stats;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class EnderBackpackItem extends Item {
 
-    public static final TranslatableText CONTAINER_NAME = new TranslatableText("container.enderchest");
+    public static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container.enderchest");
 
     public EnderBackpackItem() {
-        super(new Item.Settings().group(Inmis.GROUP).maxCount(1));
+        super(new Item.Properties().tab(Inmis.GROUP).stacksTo(1));
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+    public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         EnderChestInventory enderChestInventory = player.getEnderChestInventory();
 
-        if (enderChestInventory != null) {
-            if (!world.isClient) {
-                player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
-                        GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory), CONTAINER_NAME));
+        if(world.isClientSide) {
+            world.playSound(player, player.blockPosition(), SoundEvents.ENDER_CHEST_OPEN, SoundCategory.PLAYERS, 1f, 0f);
+        }
 
-                player.incrementStat(Stats.OPEN_ENDERCHEST);
+        if (enderChestInventory != null) {
+            if (!world.isClientSide) {
+                player.openMenu(new SimpleNamedContainerProvider((i, playerInventory, playerEntity) ->
+                        ChestContainer.threeRows(i, playerInventory, enderChestInventory), CONTAINER_NAME));
+
+                player.awardStat(Stats.OPEN_ENDERCHEST);
             }
         }
 
-        return TypedActionResult.success(player.getStackInHand(hand));
+        return ActionResult.success(player.getItemInHand(hand));
     }
 }

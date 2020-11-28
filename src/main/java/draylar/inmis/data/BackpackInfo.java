@@ -1,4 +1,6 @@
-package draylar.inmis.config;
+package draylar.inmis.data;
+
+import net.minecraft.util.SoundEvent;
 
 /**
  * Stores information about a single backpack.
@@ -13,6 +15,7 @@ public class BackpackInfo {
     private final int rowWidth;
     private final int numberOfRows;
     private final boolean isFireImmune;
+    private final SoundEvent sound;
 
     /**
      * Creates a new BackpackInfo instance.
@@ -22,11 +25,12 @@ public class BackpackInfo {
      * @param numberOfRows  number of horizontal slot groups
      * @param isFireImmune  whether this backpack is fire-immune (Netherite)
      */
-    public BackpackInfo(String name, int rowWidth, int numberOfRows, boolean isFireImmune) {
+    public BackpackInfo(String name, int rowWidth, int numberOfRows, boolean isFireImmune, SoundEvent sound) {
         this.name = name;
         this.rowWidth = rowWidth;
         this.numberOfRows = numberOfRows;
         this.isFireImmune = isFireImmune;
+        this.sound = sound;
     }
 
     public String getName() {
@@ -45,6 +49,10 @@ public class BackpackInfo {
         return isFireImmune;
     }
 
+    public SoundEvent getSound() {
+        return sound;
+    }
+
     /**
      * Creates a new BackpackInfo instance.
      *
@@ -52,7 +60,7 @@ public class BackpackInfo {
      * @param rowWidth  width of each row
      * @param numberOfRows  number of horizontal slot groups
      */
-    public static BackpackInfo of(String name, int rowWidth, int numberOfRows, boolean isFireImmune) {
-        return new BackpackInfo(name, rowWidth, numberOfRows, isFireImmune);
+    public static BackpackInfo of(String name, int rowWidth, int numberOfRows, boolean isFireImmune, SoundEvent sound) {
+        return new BackpackInfo(name, rowWidth, numberOfRows, isFireImmune, sound);
     }
 }

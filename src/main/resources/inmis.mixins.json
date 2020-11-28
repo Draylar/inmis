@@ -2,11 +2,13 @@
   "required": true,
   "package": "draylar.inmis.mixin",
   "compatibilityLevel": "JAVA_8",
+  "refmap": "inmis.refmap.json",
+  "minVersion": "0.7",
   "mixins": [
-    "ShapedRecipeMixin"
+    "ContainerTypeMixin"
   ],
   "client": [
-    "ItemStackMixin"
+    "ScreenManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

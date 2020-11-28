@@ -1,55 +1,43 @@
 package draylar.inmis.content;
 
-import draylar.inmis.config.BackpackInfo;
-import draylar.inmis.ui.BackpackScreenHandler;
-import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import draylar.inmis.data.BackpackInfo;
+import draylar.inmis.ui.BackpackContainer;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 public class BackpackItem extends Item {
 
     private final BackpackInfo backpack;
 
-    public BackpackItem(BackpackInfo backpack, Item.Settings settings) {
+    public BackpackItem(BackpackInfo backpack, Item.Properties settings) {
         super(settings);
         this.backpack = backpack;
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.setCurrentHand(hand);
+    public ActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.startUsingItem(hand);
 
-        if(world != null && !world.isClient) {
-            user.openHandledScreen(new ExtendedScreenHandlerFactory() {
-                @Override
-                public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-                    packetByteBuf.writeEnumConstant(hand);
-                }
-        
-                @Override
-                public Text getDisplayName() {
-                    return new TranslatableText(BackpackItem.this.getTranslationKey());
-                }
-        
-                @Override
-                public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-                    return new BackpackScreenHandler(syncId, inv, hand);
-                }
-            });
+        if(world.isClientSide) {
+            world.playSound(user, user.blockPosition(), backpack.getSound(), SoundCategory.PLAYERS, 1, 1);
         }
 
-        return TypedActionResult.success(user.getStackInHand(hand));
+        if(world != null && !world.isClientSide) {
+            user.openMenu(new SimpleNamedContainerProvider((sync, inv, player) -> new BackpackContainer(sync, inv, hand), this.getDescription()));
+        }
+
+        return ActionResult.success(user.getItemInHand(hand));
+    }
+
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return false;
     }
 
     public BackpackInfo getTier() {

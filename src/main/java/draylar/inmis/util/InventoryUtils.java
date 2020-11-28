@@ -1,33 +1,33 @@
 package draylar.inmis.util;
 
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 
 public class InventoryUtils {
 
-    public static ListTag toTag(SimpleInventory inventory) {
-        ListTag tag = new ListTag();
+    public static ListNBT toTag(Inventory inventory) {
+        ListNBT tag = new ListNBT();
 
-        for(int i = 0; i < inventory.size(); i++) {
-            CompoundTag stackTag = new CompoundTag();
+        for(int i = 0; i < inventory.getContainerSize(); i++) {
+            CompoundNBT stackTag = new CompoundNBT();
             stackTag.putInt("Slot", i);
-            stackTag.put("Stack", inventory.getStack(i).toTag(new CompoundTag()));
+            stackTag.put("Stack", inventory.getItem(i).save(new CompoundNBT()));
             tag.add(stackTag);
         }
 
         return tag;
     }
 
-    public static void fromTag(ListTag tag, SimpleInventory inventory) {
-        inventory.clear();
+    public static void fromTag(ListNBT tag, Inventory inventory) {
+        inventory.clearContent();
 
         tag.forEach(element -> {
-            CompoundTag stackTag = (CompoundTag) element;
+            CompoundNBT stackTag = (CompoundNBT) element;
             int slot = stackTag.getInt("Slot");
-            ItemStack stack = ItemStack.fromTag(stackTag.getCompound("Stack"));
-            inventory.setStack(slot, stack);
+            ItemStack stack = ItemStack.of(stackTag.getCompound("Stack"));
+            inventory.setItem(slot, stack);
         });
     }
 }

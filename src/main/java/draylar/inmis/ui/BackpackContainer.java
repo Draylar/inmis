@@ -1,24 +1,22 @@
 package draylar.inmis.ui;
 
 import draylar.inmis.Inmis;
-import draylar.inmis.config.BackpackInfo;
+import draylar.inmis.data.BackpackInfo;
 import draylar.inmis.content.BackpackItem;
+import draylar.inmis.ui.api.Dimension;
+import draylar.inmis.ui.api.Point;
 import draylar.inmis.util.InventoryUtils;
-import me.shedaniel.math.Dimension;
-import me.shedaniel.math.Point;
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.Hand;
 
-public class BackpackScreenHandler extends ScreenHandler {
+public class BackpackContainer extends Container {
 
     public static final int BACKPACK_INVENTORY = 1;
     private PlayerEntity player;
@@ -26,21 +24,19 @@ public class BackpackScreenHandler extends ScreenHandler {
     private ItemStack backpackStack;
     int padding = 8;
     int titleSpace = 10;
+    /*
+    public BackpackContainer(int synchronizationID, PlayerInventory playerInventory, PacketBuffer packetByteBuf) {
+        this(synchronizationID, playerInventory, packetByteBuf.readEnum(Hand.class));
+    }*/
     
-    public BackpackScreenHandler(int synchronizationID, PlayerInventory playerInventory, PacketByteBuf packetByteBuf) {
-        this(synchronizationID, playerInventory, packetByteBuf.readEnumConstant(Hand.class));
-    }
-    
-    public BackpackScreenHandler(int synchronizationID, PlayerInventory playerInventory, Hand hand) {
+    public BackpackContainer(int synchronizationID, PlayerInventory playerInventory, Hand hand) {
         super(Inmis.CONTAINER_TYPE, synchronizationID);
         this.player = playerInventory.player;
         this.hand = hand;
-        ItemStack backpackStack = player.getStackInHand(hand);
+        ItemStack backpackStack = player.getItemInHand(hand);
         
         if (backpackStack.getItem() instanceof BackpackItem) {
             setupContainer(playerInventory, backpackStack);
-        } else {
-            this.close(player);
         }
     }
     
@@ -50,12 +46,13 @@ public class BackpackScreenHandler extends ScreenHandler {
         int rowWidth = tier.getRowWidth();
         int numberOfRows = tier.getNumberOfRows();
 
-        ListTag tag = backpackStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
-        SimpleInventory inventory = new SimpleInventory(rowWidth * numberOfRows) {
+        ListNBT tag = backpackStack.getOrCreateTag().getList("Inventory", 10);
+        Inventory inventory = new Inventory(rowWidth * numberOfRows) {
+
             @Override
-            public void markDirty() {
+            public void setChanged() {
                 backpackStack.getOrCreateTag().put("Inventory", InventoryUtils.toTag(this));
-                super.markDirty();
+                super.setChanged();
             }
         };
 
@@ -82,7 +79,7 @@ public class BackpackScreenHandler extends ScreenHandler {
     }
     
     public BackpackItem getItem() {
-        return (BackpackItem) player.getStackInHand(hand).getItem();
+        return (BackpackItem) player.getItemInHand(hand).getItem();
     }
     
     public Dimension getDimension() {
@@ -92,40 +89,40 @@ public class BackpackScreenHandler extends ScreenHandler {
     
     public Point getBackpackSlotPosition(Dimension dimension, int x, int y) {
         BackpackInfo tier = getItem().getTier();
-        return new Point(dimension.getWidth() / 2 - tier.getRowWidth() * 9 + x * 18, padding + titleSpace + y * 18);
+        return new Point(dimension.width / 2 - tier.getRowWidth() * 9 + x * 18, padding + titleSpace + y * 18);
     }
     
     public Point getPlayerInvSlotPosition(Dimension dimension, int x, int y) {
         BackpackInfo tier = getItem().getTier();
-        return new Point(dimension.getWidth() / 2 - 9 * 9 + x * 18, dimension.getHeight() - padding - 4 * 18 - 3 + y * 18 + (y == 3 ? 4 : 0));
+        return new Point(dimension.width / 2 - 9 * 9 + x * 18, dimension.height - padding - 4 * 18 - 3 + y * 18 + (y == 3 ? 4 : 0));
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
-        ItemStack stackInHand = player.getStackInHand(this.hand);
+    public boolean stillValid(PlayerEntity player) {
+        ItemStack stackInHand = player.getItemInHand(this.hand);
         return stackInHand.getItem() instanceof BackpackItem;
     }
     
     @Override
-    public ItemStack transferSlot(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasStack()) {
-            ItemStack toInsert = slot.getStack();
+        if (slot != null && slot.hasItem()) {
+            ItemStack toInsert = slot.getItem();
             itemStack = toInsert.copy();
             BackpackInfo tier = getItem().getTier();
             if (index < tier.getNumberOfRows() * tier.getRowWidth()) {
-                if (!this.insertItem(toInsert, tier.getNumberOfRows() * tier.getRowWidth(), this.slots.size(), true)) {
+                if (!this.moveItemStackTo(toInsert, tier.getNumberOfRows() * tier.getRowWidth(), this.slots.size(), true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.insertItem(toInsert, 0, tier.getNumberOfRows() * tier.getRowWidth(), false)) {
+            } else if (!this.moveItemStackTo(toInsert, 0, tier.getNumberOfRows() * tier.getRowWidth(), false)) {
                 return ItemStack.EMPTY;
             }
             
             if (toInsert.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
+                slot.set(ItemStack.EMPTY);
             } else {
-                slot.markDirty();
+                slot.setChanged();
             }
         }
         
@@ -133,18 +130,19 @@ public class BackpackScreenHandler extends ScreenHandler {
     }
 
     private class BackpackLockedSlot extends Slot {
-        public BackpackLockedSlot(Inventory inventory, int index, int x, int y) {
+
+        public BackpackLockedSlot(IInventory inventory, int index, int x, int y) {
             super(inventory, index, x, y);
         }
-        
+
         @Override
-        public boolean canTakeItems(PlayerEntity playerEntity) {
-            return !(getStack().getItem() instanceof BackpackItem) && getStack() != player.getStackInHand(hand);
+        public boolean mayPickup(PlayerEntity player) {
+            return !(getItem().getItem() instanceof BackpackItem) && getItem() != player.getItemInHand(hand);
         }
         
         @Override
-        public boolean canInsert(ItemStack stack) {
-            return !(getStack().getItem() instanceof BackpackItem) && getStack() != player.getStackInHand(hand);
+        public boolean mayPlace(ItemStack stack) {
+            return !(stack.getItem() instanceof BackpackItem) && stack != player.getItemInHand(hand);
         }
     }
 }
