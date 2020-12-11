@@ -1,0 +1,19 @@
+{
+  "itemGroup.inmis.backpack": "Inmis",
+
+  "ui.inmis.backpack": "Mochila",
+
+  "item.inmis.baby_backpack": "Mochila bebé",
+  "item.inmis.ender_pouch": "Mochila de ender",
+
+  "item.inmis.frayed_backpack": "Mochila gastada",
+  "item.inmis.plated_backpack": "Mochila blindada",
+  "item.inmis.gilded_backpack": "Mochila dorada",
+  "item.inmis.bejeweled_backpack": "Mochila enjoyada",
+  "item.inmis.blazing_backpack": "Mochila flameante",
+  "item.inmis.withered_backpack": "Mochila marchita",
+  "item.inmis.endless_backpack": "Mochila sin fin",
+
+  "inmis.advancement.baby_backpack.title": "Bolsa de obsequios",
+  "inmis.advancement.baby_backpack.description": "¡Perfecta para regalos de fiesta!"
+}
