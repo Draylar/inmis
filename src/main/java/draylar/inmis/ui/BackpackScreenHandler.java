@@ -144,7 +144,7 @@ public class BackpackScreenHandler extends ScreenHandler {
         
         @Override
         public boolean canInsert(ItemStack stack) {
-            return !(getStack().getItem() instanceof BackpackItem) && getStack() != player.getStackInHand(hand);
+            return !(stack.getItem() instanceof BackpackItem) && stack != player.getStackInHand(hand);
         }
     }
 }
