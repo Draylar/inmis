@@ -22,7 +22,8 @@
     ]
   },
   "mixins": [
-    "inmis.mixins.json"
+    "inmis.mixins.json",
+    "inmis.trinkets.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.7.8+build.186",
