@@ -1,9 +1,9 @@
 {
   "required": true,
-  "package": "draylar.inmis.mixin",
+  "package": "draylar.inmis.mixin.trinkets",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "trinkets.BackpackItemTrinketMixin"
+    "BackpackItemTrinketMixin"
   ],
   "injectors": {
     "defaultRequire": 1
