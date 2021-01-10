@@ -8,6 +8,7 @@ import draylar.inmis.config.InmisConfig;
 import draylar.inmis.content.BackpackItem;
 import draylar.inmis.content.EnderBackpackItem;
 import draylar.inmis.mixin.trinkets.TrinketsMixinPlugin;
+import draylar.inmis.network.ServerNetworking;
 import draylar.inmis.ui.BackpackScreenHandler;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
@@ -38,6 +39,8 @@ public class Inmis implements ModInitializer {
         if (TrinketsMixinPlugin.isTrinketsLoaded) {
             TrinketSlots.addSlot(SlotGroups.CHEST, Slots.BACKPACK, new Identifier("trinkets", "textures/item/empty_trinket_slot_backpack.png"));
         }
+
+        ServerNetworking.init();
     }
 
     private void registerBackpacks() {
