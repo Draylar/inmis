@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 public class TrinketsMixinPlugin implements IMixinConfigPlugin {
-    private static final String TRINKETS_MOD_ID = "trinkets";
 
+    private static final String TRINKETS_MOD_ID = "trinkets";
     public static boolean isTrinketsLoaded = false;
 
     @Override

@@ -17,6 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Matrix4f;
 
 public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> {
+
     private static final Identifier GUI_TEXTURE = new Identifier("inmis", "textures/gui/backpack_container.png");
     private final static int TOP_OFFSET = 24;
     private final static int SLOT_SIZE = 18;

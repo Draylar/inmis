@@ -1,4 +1,4 @@
-package draylar.inmis.content;
+package draylar.inmis.item;
 
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.ui.BackpackScreenHandler;
@@ -30,7 +30,6 @@ public class BackpackItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         user.setCurrentHand(hand);
         openScreen(user, user.getStackInHand(hand));
-
         return TypedActionResult.success(user.getStackInHand(hand));
     }
 

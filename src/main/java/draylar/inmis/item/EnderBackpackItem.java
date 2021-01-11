@@ -1,4 +1,4 @@
-package draylar.inmis.content;
+package draylar.inmis.item;
 
 import draylar.inmis.Inmis;
 import net.minecraft.entity.player.PlayerEntity;

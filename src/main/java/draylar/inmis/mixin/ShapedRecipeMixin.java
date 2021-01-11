@@ -1,6 +1,6 @@
 package draylar.inmis.mixin;
 
-import draylar.inmis.content.BackpackItem;
+import draylar.inmis.item.BackpackItem;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;

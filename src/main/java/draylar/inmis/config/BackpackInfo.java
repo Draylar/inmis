@@ -5,7 +5,7 @@ package draylar.inmis.config;
  * A backpack has a name (which is used in registry as name + _backpack), row width, and number of rows.
  * Row width represents how long a row is, while number of rows is used for the number of horizontal slot groups.
  *
- * BackpackInfo instances are automatically read from the config file and used in {@link draylar.inmis.content.BackpackItem}.
+ * BackpackInfo instances are automatically read from the config file and used in {@link draylar.inmis.item.BackpackItem}.
  */
 public class BackpackInfo {
 

@@ -2,7 +2,7 @@ package draylar.inmis.ui;
 
 import draylar.inmis.Inmis;
 import draylar.inmis.config.BackpackInfo;
-import draylar.inmis.content.BackpackItem;
+import draylar.inmis.item.BackpackItem;
 import draylar.inmis.util.InventoryUtils;
 import me.shedaniel.math.Dimension;
 import me.shedaniel.math.Point;
@@ -19,10 +19,9 @@ import net.minecraft.screen.slot.Slot;
 
 public class BackpackScreenHandler extends ScreenHandler {
 
-    public static final int BACKPACK_INVENTORY = 1;
-    private ItemStack backpackStack;
-    int padding = 8;
-    int titleSpace = 10;
+    private final ItemStack backpackStack;
+    private final int padding = 8;
+    private final int titleSpace = 10;
     
     public BackpackScreenHandler(int synchronizationID, PlayerInventory playerInventory, PacketByteBuf packetByteBuf) {
         this(synchronizationID, playerInventory, packetByteBuf.readItemStack());
@@ -128,6 +127,7 @@ public class BackpackScreenHandler extends ScreenHandler {
     }
 
     private class BackpackLockedSlot extends Slot {
+
         public BackpackLockedSlot(Inventory inventory, int index, int x, int y) {
             super(inventory, index, x, y);
         }

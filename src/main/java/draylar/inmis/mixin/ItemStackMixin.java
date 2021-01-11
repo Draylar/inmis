@@ -1,6 +1,6 @@
 package draylar.inmis.mixin;
 
-import draylar.inmis.content.BackpackItem;
+import draylar.inmis.item.BackpackItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;

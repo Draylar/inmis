@@ -5,7 +5,7 @@ import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import draylar.inmis.Inmis;
-import draylar.inmis.content.BackpackItem;
+import draylar.inmis.item.BackpackItem;
 import draylar.inmis.mixin.trinkets.TrinketsMixinPlugin;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -19,6 +19,7 @@ import net.minecraft.util.Identifier;
 import java.util.stream.Stream;
 
 public class ServerNetworking {
+
     public static Identifier OPEN_BACKPACK = Inmis.id("open_backpack");
 
     public static void init() {

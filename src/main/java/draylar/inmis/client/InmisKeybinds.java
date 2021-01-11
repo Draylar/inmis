@@ -11,17 +11,16 @@ import net.minecraft.network.PacketByteBuf;
 import org.lwjgl.glfw.GLFW;
 
 public class InmisKeybinds {
-    private static KeyBinding openBackpackKeybinding;
+
+    private static final KeyBinding OPEN_BACKPACK = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+            "key.inmis.open_backpack",
+            InputUtil.Type.KEYSYM,
+            GLFW.GLFW_KEY_GRAVE_ACCENT,
+            "category.inmis.keybindings"));
 
     public static void initialize() {
-        openBackpackKeybinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.inmis.open_backpack",
-                InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_GRAVE_ACCENT,
-                "category.inmis.keybindings"));
-
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (openBackpackKeybinding.wasPressed()) {
+            if (OPEN_BACKPACK.wasPressed()) {
                 ClientPlayNetworking.send(ServerNetworking.OPEN_BACKPACK, new PacketByteBuf(Unpooled.buffer()));
             }
         });
