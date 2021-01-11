@@ -15,5 +15,8 @@
   "item.inmis.endless_backpack": "Рюкзак Края",
 
   "inmis.advancement.baby_backpack.title": "Прекрасный Рюкзак",
-  "inmis.advancement.baby_backpack.description": "Идеально подходит для подарков на вечеринку!"
+  "inmis.advancement.baby_backpack.description": "Идеально подходит для подарков на вечеринку!",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "Открыть рюкзак"
 }
