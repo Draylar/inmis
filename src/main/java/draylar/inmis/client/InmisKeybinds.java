@@ -15,7 +15,7 @@ public class InmisKeybinds {
     private static final KeyBinding OPEN_BACKPACK = KeyBindingHelper.registerKeyBinding(new KeyBinding(
             "key.inmis.open_backpack",
             InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_GRAVE_ACCENT,
+            GLFW.GLFW_KEY_B,
             "category.inmis.keybindings"));
 
     public static void initialize() {
