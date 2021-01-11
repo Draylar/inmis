@@ -37,7 +37,7 @@ dependencies {
     include "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
 
     // trinkets
-    modCompileOnly "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
+    modCompile "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
 }
 
 processResources {
