@@ -29,27 +29,30 @@ public class BackpackItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         user.setCurrentHand(hand);
+        openScreen(user, user.getStackInHand(hand));
 
-        if(world != null && !world.isClient) {
-            user.openHandledScreen(new ExtendedScreenHandlerFactory() {
+        return TypedActionResult.success(user.getStackInHand(hand));
+    }
+
+    public static void openScreen(PlayerEntity player, ItemStack backpackItemStack) {
+        if(player.world != null && !player.world.isClient) {
+            player.openHandledScreen(new ExtendedScreenHandlerFactory() {
                 @Override
                 public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-                    packetByteBuf.writeEnumConstant(hand);
+                    packetByteBuf.writeItemStack(backpackItemStack);
                 }
-        
+
                 @Override
                 public Text getDisplayName() {
-                    return new TranslatableText(BackpackItem.this.getTranslationKey());
+                    return new TranslatableText(backpackItemStack.getItem().getTranslationKey());
                 }
-        
+
                 @Override
                 public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-                    return new BackpackScreenHandler(syncId, inv, hand);
+                    return new BackpackScreenHandler(syncId, inv, backpackItemStack);
                 }
             });
         }
-
-        return TypedActionResult.success(user.getStackInHand(hand));
     }
 
     public BackpackInfo getTier() {

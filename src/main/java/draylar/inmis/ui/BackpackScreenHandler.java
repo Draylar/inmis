@@ -16,30 +16,26 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.Hand;
 
 public class BackpackScreenHandler extends ScreenHandler {
 
     public static final int BACKPACK_INVENTORY = 1;
-    private PlayerEntity player;
-    private Hand hand;
     private ItemStack backpackStack;
     int padding = 8;
     int titleSpace = 10;
     
     public BackpackScreenHandler(int synchronizationID, PlayerInventory playerInventory, PacketByteBuf packetByteBuf) {
-        this(synchronizationID, playerInventory, packetByteBuf.readEnumConstant(Hand.class));
+        this(synchronizationID, playerInventory, packetByteBuf.readItemStack());
     }
-    
-    public BackpackScreenHandler(int synchronizationID, PlayerInventory playerInventory, Hand hand) {
+
+    public BackpackScreenHandler(int synchronizationID, PlayerInventory playerInventory, ItemStack backpackStack) {
         super(Inmis.CONTAINER_TYPE, synchronizationID);
-        this.player = playerInventory.player;
-        this.hand = hand;
-        ItemStack backpackStack = player.getStackInHand(hand);
-        
+        this.backpackStack = backpackStack;
+
         if (backpackStack.getItem() instanceof BackpackItem) {
             setupContainer(playerInventory, backpackStack);
         } else {
+            PlayerEntity player = playerInventory.player;
             this.close(player);
         }
     }
@@ -82,7 +78,7 @@ public class BackpackScreenHandler extends ScreenHandler {
     }
     
     public BackpackItem getItem() {
-        return (BackpackItem) player.getStackInHand(hand).getItem();
+        return (BackpackItem) backpackStack.getItem();
     }
     
     public Dimension getDimension() {
@@ -102,8 +98,7 @@ public class BackpackScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        ItemStack stackInHand = player.getStackInHand(this.hand);
-        return stackInHand.getItem() instanceof BackpackItem;
+        return backpackStack.getItem() instanceof BackpackItem;
     }
     
     @Override
@@ -139,12 +134,16 @@ public class BackpackScreenHandler extends ScreenHandler {
         
         @Override
         public boolean canTakeItems(PlayerEntity playerEntity) {
-            return !(getStack().getItem() instanceof BackpackItem) && getStack() != player.getStackInHand(hand);
+            return stackMovementIsAllowed(getStack());
         }
         
         @Override
         public boolean canInsert(ItemStack stack) {
-            return !(stack.getItem() instanceof BackpackItem) && stack != player.getStackInHand(hand);
+            return stackMovementIsAllowed(stack);
+        }
+
+        private boolean stackMovementIsAllowed(ItemStack stack) {
+            return !(stack.getItem() instanceof BackpackItem) && stack != backpackStack;
         }
     }
 }

@@ -14,7 +14,13 @@ minecraft {
 }
 
 repositories {
-
+    maven {
+        url = "https://jitpack.io"
+    }
+    maven {
+        name = "NerdHubMC"
+        url = "https://maven.abusedmaster.xyz/"
+    }
 }
 
 dependencies {
@@ -33,6 +39,9 @@ dependencies {
 
     modCompile "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
     include "me.sargunvohra.mcmods:autoconfig1u:${project.auto_config_version}"
+
+    // trinkets
+    modCompileOnly "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
 }
 
 processResources {

@@ -15,5 +15,8 @@
   "item.inmis.endless_backpack": "Endless Backpack",
 
   "inmis.advancement.baby_backpack.title": "Goody Bag",
-  "inmis.advancement.baby_backpack.description": "Perfect for party gifts!"
+  "inmis.advancement.baby_backpack.description": "Perfect for party gifts!",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "Open Backpack"
 }
