@@ -3,7 +3,7 @@
 
   "ui.inmis.backpack": "Mochila",
 
-  "item.inmis.baby_backpack": "Mochila bebé",
+  "item.inmis.baby_backpack": "Mochila de bebé",
   "item.inmis.ender_pouch": "Mochila de ender",
 
   "item.inmis.frayed_backpack": "Mochila gastada",
@@ -15,5 +15,8 @@
   "item.inmis.endless_backpack": "Mochila sin fin",
 
   "inmis.advancement.baby_backpack.title": "Bolsa de obsequios",
-  "inmis.advancement.baby_backpack.description": "¡Perfecta para regalos de fiesta!"
+  "inmis.advancement.baby_backpack.description": "¡Perfecta para regalos festivos!",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "Abrir la mochila"
 }

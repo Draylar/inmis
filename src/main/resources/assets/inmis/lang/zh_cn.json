@@ -3,7 +3,7 @@
 
   "ui.inmis.backpack": "背包",
 
-  "item.inmis.baby_backpack": "Baby背包",
+  "item.inmis.baby_backpack": "Baby 背包",
   "item.inmis.ender_pouch": "末影背包",
 
   "item.inmis.frayed_backpack": "皮革背包",
@@ -12,5 +12,11 @@
   "item.inmis.bejeweled_backpack": "宝石背包",
   "item.inmis.blazing_backpack": "烈焰背包",
   "item.inmis.withered_backpack": "凋零背包",
-  "item.inmis.endless_backpack": "终界背包"
+  "item.inmis.endless_backpack": "终界背包",
+  
+  "inmis.advancement.baby_backpack.title": "红包?",
+  "inmis.advancement.baby_backpack.description": "你今年收到红包了吗？",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "打开背包"
 }
