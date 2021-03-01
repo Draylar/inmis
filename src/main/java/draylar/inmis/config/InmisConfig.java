@@ -18,4 +18,6 @@ public class InmisConfig implements ConfigData {
             BackpackInfo.of("withered", 11, 6, false),
             BackpackInfo.of("endless", 15, 6, false)
     );
+
+    public boolean unstackablesOnly = false;
 }

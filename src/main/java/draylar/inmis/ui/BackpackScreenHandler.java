@@ -139,6 +139,14 @@ public class BackpackScreenHandler extends ScreenHandler {
         
         @Override
         public boolean canInsert(ItemStack stack) {
+            // If the "unstackables only" config option is turned on,
+            // do not allow players to insert stacks with >1 max count.
+            if(Inmis.CONFIG.unstackablesOnly) {
+                if(stack.getMaxCount() > 1) {
+                    return false;
+                }
+            }
+
             return stackMovementIsAllowed(stack);
         }
 
