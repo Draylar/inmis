@@ -12,6 +12,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
@@ -145,6 +146,11 @@ public class BackpackScreenHandler extends ScreenHandler {
                 if(stack.getMaxCount() > 1) {
                     return false;
                 }
+            }
+
+            // Do not allow players to insert shulkers into backpacks.
+            if(stack.getItem().equals(Items.SHULKER_BOX)) {
+                return false;
             }
 
             return stackMovementIsAllowed(stack);
