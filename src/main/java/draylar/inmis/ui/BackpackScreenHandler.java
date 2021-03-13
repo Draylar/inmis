@@ -1,11 +1,11 @@
 package draylar.inmis.ui;
 
 import draylar.inmis.Inmis;
+import draylar.inmis.api.Dimension;
+import draylar.inmis.api.Point;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.item.BackpackItem;
 import draylar.inmis.util.InventoryUtils;
-import me.shedaniel.math.Dimension;
-import me.shedaniel.math.Point;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

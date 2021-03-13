@@ -10,8 +10,7 @@ import draylar.inmis.item.EnderBackpackItem;
 import draylar.inmis.mixin.trinkets.TrinketsMixinPlugin;
 import draylar.inmis.network.ServerNetworking;
 import draylar.inmis.ui.BackpackScreenHandler;
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
+import draylar.omegaconfig.OmegaConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
@@ -28,7 +27,7 @@ public class Inmis implements ModInitializer {
 
     public static final Identifier CONTAINER_ID = id("backpack");
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
-    public static final InmisConfig CONFIG = AutoConfig.register(InmisConfig.class, GsonConfigSerializer::new).getConfig();
+    public static final InmisConfig CONFIG = OmegaConfig.register(InmisConfig.class);
     public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = ScreenHandlerRegistry.registerExtended(CONTAINER_ID, BackpackScreenHandler::new);
 
     @Override

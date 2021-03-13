@@ -1,13 +1,11 @@
 package draylar.inmis.config;
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import draylar.omegaconfig.api.Config;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Config(name = "inmis")
-public class InmisConfig implements ConfigData {
+public class InmisConfig implements Config {
     public List<BackpackInfo> backpacks = Arrays.asList(
             BackpackInfo.of("baby", 3, 1, false),
             BackpackInfo.of("frayed", 9, 1, false),
@@ -20,4 +18,9 @@ public class InmisConfig implements ConfigData {
     );
 
     public boolean unstackablesOnly = false;
+
+    @Override
+    public String getName() {
+        return "inmis";
+    }
 }

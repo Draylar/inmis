@@ -1,8 +1,8 @@
 package draylar.inmis.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import me.shedaniel.math.Dimension;
-import me.shedaniel.math.Rectangle;
+import draylar.inmis.api.Dimension;
+import draylar.inmis.api.Rectangle;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.BufferBuilder;
@@ -28,8 +28,8 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         super(handler, player, title);
         
         Dimension dimension = handler.getDimension();
-        this.backgroundWidth = dimension.width;
-        this.backgroundHeight = dimension.height;
+        this.backgroundWidth = dimension.getWidth();
+        this.backgroundHeight = dimension.getHeight();
         this.titleY = 7;
         this.playerInventoryTitleX = handler.getPlayerInvSlotPosition(dimension, 0, 0).x;
         this.playerInventoryTitleY = this.backgroundHeight - 94;
