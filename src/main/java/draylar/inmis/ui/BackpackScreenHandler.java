@@ -149,7 +149,7 @@ public class BackpackScreenHandler extends ScreenHandler {
             }
 
             // Do not allow players to insert shulkers into backpacks.
-            if(stack.getItem().equals(Items.SHULKER_BOX)) {
+            if(Inmis.CONFIG.disableShulkers && stack.getItem().equals(Items.SHULKER_BOX)) {
                 return false;
             }
 

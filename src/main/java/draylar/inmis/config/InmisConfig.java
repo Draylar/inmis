@@ -1,5 +1,6 @@
 package draylar.inmis.config;
 
+import draylar.omegaconfig.api.Comment;
 import draylar.omegaconfig.api.Config;
 import net.minecraft.sound.SoundEvents;
 
@@ -19,6 +20,9 @@ public class InmisConfig implements Config {
     );
 
     public boolean unstackablesOnly = false;
+
+    @Comment(value = "Whether Shulker Boxes should be blacklisted from being placed inside Inmis Backpacks.")
+    public boolean disableShulkers = true;
 
     @Override
     public String getName() {
