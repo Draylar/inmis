@@ -32,3 +32,6 @@ bin/
 
 run/
 /logs/
+/minecraft/
+/minecraft/*
+/minepkg-lock.toml
