@@ -1,0 +1,22 @@
+{
+  "itemGroup.inmis.backpack": "Inmis",
+
+  "ui.inmis.backpack": "Mochila",
+
+  "item.inmis.baby_backpack": "Mochila Pequena",
+  "item.inmis.ender_pouch": "Bolsa do Ender",
+
+  "item.inmis.frayed_backpack": "Mochila Esfarrapada",
+  "item.inmis.plated_backpack": "Mochila Prateada",
+  "item.inmis.gilded_backpack": "Mochila Dourada",
+  "item.inmis.bejeweled_backpack": "Mochila com Joias",
+  "item.inmis.blazing_backpack": "Mochila Ardente",
+  "item.inmis.withered_backpack": "Mochila do Wither",
+  "item.inmis.endless_backpack": "Mochila do Fim",
+
+  "inmis.advancement.baby_backpack.title": "Bolsa de Presentes",
+  "inmis.advancement.baby_backpack.description": "Perfeita para festas com presentes!",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "Abrir Mochila"
+}
