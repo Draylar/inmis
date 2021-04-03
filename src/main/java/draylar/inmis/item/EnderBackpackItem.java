@@ -29,8 +29,10 @@ public class EnderBackpackItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         EnderChestInventory enderChestInventory = player.getEnderChestInventory();
 
-        if(world.isClient) {
-            world.playSound(player, player.getBlockPos(), SoundEvents.BLOCK_ENDER_CHEST_OPEN, SoundCategory.PLAYERS, 1, 1);
+        if(Inmis.CONFIG.playSound) {
+            if (world.isClient) {
+                world.playSound(player, player.getBlockPos(), SoundEvents.BLOCK_ENDER_CHEST_OPEN, SoundCategory.PLAYERS, 1, 1);
+            }
         }
 
         if (enderChestInventory != null) {

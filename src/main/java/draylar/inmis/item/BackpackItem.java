@@ -1,5 +1,6 @@
 package draylar.inmis.item;
 
+import draylar.inmis.Inmis;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.ui.BackpackScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
@@ -33,8 +34,10 @@ public class BackpackItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         user.setCurrentHand(hand);
 
-        if(world.isClient) {
-            world.playSound(user, user.getBlockPos(), Registry.SOUND_EVENT.get(new Identifier(backpack.getOpenSound())), SoundCategory.PLAYERS, 1, 1);
+        if(Inmis.CONFIG.playSound) {
+            if (world.isClient) {
+                world.playSound(user, user.getBlockPos(), Registry.SOUND_EVENT.get(new Identifier(backpack.getOpenSound())), SoundCategory.PLAYERS, 1, 1);
+            }
         }
 
         openScreen(user, user.getStackInHand(hand));

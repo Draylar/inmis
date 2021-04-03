@@ -24,6 +24,9 @@ public class InmisConfig implements Config {
     @Comment(value = "Whether Shulker Boxes should be blacklisted from being placed inside Inmis Backpacks.")
     public boolean disableShulkers = true;
 
+    @Comment(value = "Whether Backpacks should play a sound when opened.")
+    public boolean playSound = true;
+
     @Override
     public String getName() {
         return "inmis";
