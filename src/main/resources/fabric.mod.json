@@ -20,6 +20,9 @@
     ],
     "client": [
       "draylar.inmis.InmisClient"
+    ],
+    "shulkerboxtooltip": [
+      "draylar.inmis.compat.InmisShulkerBoxTooltipCompat"
     ]
   },
   "mixins": [

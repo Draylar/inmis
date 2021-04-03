@@ -21,6 +21,9 @@ repositories {
         name = "NerdHubMC"
         url = "https://maven.abusedmaster.xyz/"
     }
+
+    maven {url "https://maven.misterpemodder.com/libs-release/"}
+    maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
@@ -38,6 +41,14 @@ dependencies {
 
     // trinkets
     modCompile "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
+
+    // Shulker Box Tooltip
+    modCompileOnly modRuntime("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {
+        exclude group: "me.shedaniel.cloth"
+    }
+    modCompileOnly modRuntime("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
+        exclude(group: "net.fabricmc.fabric-api")
+    }
 }
 
 processResources {

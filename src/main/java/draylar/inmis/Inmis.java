@@ -23,6 +23,8 @@ import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class Inmis implements ModInitializer {
@@ -34,10 +36,11 @@ public class Inmis implements ModInitializer {
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
     public static final InmisConfig CONFIG = OmegaConfig.register(InmisConfig.class);
     public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = ScreenHandlerRegistry.registerExtended(CONTAINER_ID, BackpackScreenHandler::new);
+    public static final List<Item> BACKPACKS = new ArrayList<>();
+    public static final Item ENDER_POUCH = Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());;
 
     @Override
     public void onInitialize() {
-        Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());
         registerBackpacks();
 
         if (TrinketsMixinPlugin.isTrinketsLoaded) {
@@ -71,7 +74,8 @@ public class Inmis implements ModInitializer {
                 }
             }
 
-            Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
+            BackpackItem registered = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
+            BACKPACKS.add(registered);
         }
     }
 
