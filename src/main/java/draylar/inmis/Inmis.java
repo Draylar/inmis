@@ -20,11 +20,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Optional;
 
 public class Inmis implements ModInitializer {
 
     // inv component id is universalcomponents:inventory
 
+    public static final Logger LOGGER = LogManager.getLogger();
     public static final Identifier CONTAINER_ID = id("backpack");
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
     public static final InmisConfig CONFIG = OmegaConfig.register(InmisConfig.class);
@@ -43,12 +48,27 @@ public class Inmis implements ModInitializer {
     }
 
     private void registerBackpacks() {
+        InmisConfig defaultConfig = new InmisConfig();
+
         for (BackpackInfo backpack : Inmis.CONFIG.backpacks) {
             Item.Settings settings = new Item.Settings().group(Inmis.GROUP).maxCount(1);
 
             // setup fireproof item settings
             if(backpack.isFireImmune()) {
                 settings.fireproof();
+            }
+
+            // old config instances do not have the sound stuff
+            if(backpack.getOpenSound() == null) {
+                Optional<BackpackInfo> any = defaultConfig.backpacks.stream().filter(info -> info.getName().equals(backpack.getName())).findAny();
+                any.ifPresent(backpackInfo -> backpack.setOpenSound(backpackInfo.getOpenSound()));
+
+                // if it is STILL null, log an error and set a default
+                if(backpack.getOpenSound() == null) {
+                    LOGGER.info(String.format("Could not find a sound event for %s in inmis.json config.", backpack.getName()));
+                    LOGGER.info("Consider regenerating your config, or assigning the openSound value. Rolling with defaults for now.");
+                    backpack.setOpenSound("minecraft:item.armor.equip_leather");
+                }
             }
 
             Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
