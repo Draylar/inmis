@@ -3,8 +3,7 @@
   "package": "draylar.inmis.mixin.trinkets",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BackpackItemTrinketMixin",
-    "SoundEventAccessor"
+    "BackpackItemTrinketMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -3,7 +3,8 @@
   "package": "draylar.inmis.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ShapedRecipeMixin"
+    "ShapedRecipeMixin",
+    "SoundEventAccessor"
   ],
   "client": [
     "ItemStackMixin"

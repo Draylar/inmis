@@ -1,4 +1,4 @@
-package draylar.inmis.mixin.trinkets;
+package draylar.inmis.mixin;
 
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;

@@ -1,6 +1,6 @@
 package draylar.inmis.config;
 
-import draylar.inmis.mixin.trinkets.SoundEventAccessor;
+import draylar.inmis.mixin.SoundEventAccessor;
 import net.minecraft.sound.SoundEvent;
 
 /**
