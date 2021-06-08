@@ -13,7 +13,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
@@ -46,7 +46,7 @@ public class BackpackScreenHandler extends ScreenHandler {
         int rowWidth = tier.getRowWidth();
         int numberOfRows = tier.getNumberOfRows();
 
-        ListTag tag = backpackStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+        NbtList tag = backpackStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
         SimpleInventory inventory = new SimpleInventory(rowWidth * numberOfRows) {
             @Override
             public void markDirty() {

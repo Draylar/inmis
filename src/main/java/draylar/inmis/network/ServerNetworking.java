@@ -1,7 +1,6 @@
 package draylar.inmis.network;
 
-import dev.emi.trinkets.api.SlotGroups;
-import dev.emi.trinkets.api.Slots;
+import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import draylar.inmis.Inmis;
@@ -15,7 +14,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ServerNetworking {
@@ -32,15 +34,23 @@ public class ServerNetworking {
 
     private static void receiveOpenBackpackPacket(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         if (TrinketsMixinPlugin.isTrinketsLoaded) {
-            TrinketComponent trinketComponent = TrinketsApi.getTrinketComponent(player);
-            ItemStack backpackSlotItemStack = trinketComponent.getStack(SlotGroups.CHEST, Slots.BACKPACK);
-            if (backpackSlotItemStack != ItemStack.EMPTY && backpackSlotItemStack.getItem() instanceof BackpackItem) {
-                BackpackItem.openScreen(player, backpackSlotItemStack);
-                return;
+            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+
+            // Iterate over the player's Trinket inventory.
+            // Once a backpack has been found, open it.
+            // TODO: HOW DOES THIS WORK WHEN TRINKETS IS NOT INSTALLED???
+            if(component.isPresent()) {
+                List<Pair<SlotReference, ItemStack>> allEquipped = component.get().getAllEquipped();
+                for(Pair<SlotReference, ItemStack> entry : allEquipped) {
+                    if(entry.getRight().getItem() instanceof BackpackItem) {
+                        BackpackItem.openScreen(player, entry.getRight());
+                        return;
+                    }
+                }
             }
         }
 
-        ItemStack firstBackpackItemStack = Stream.concat(player.inventory.offHand.stream(), player.inventory.main.stream())
+        ItemStack firstBackpackItemStack = Stream.concat(player.getInventory().offHand.stream(), player.getInventory().main.stream())
                 .filter((itemStack) -> itemStack.getItem() instanceof BackpackItem)
                 .findFirst()
                 .orElse(ItemStack.EMPTY);

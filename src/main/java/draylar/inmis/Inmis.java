@@ -1,8 +1,5 @@
 package draylar.inmis;
 
-import dev.emi.trinkets.api.SlotGroups;
-import dev.emi.trinkets.api.Slots;
-import dev.emi.trinkets.api.TrinketSlots;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.config.InmisConfig;
 import draylar.inmis.item.BackpackItem;
@@ -29,8 +26,6 @@ import java.util.Optional;
 
 public class Inmis implements ModInitializer {
 
-    // inv component id is universalcomponents:inventory
-
     public static final Logger LOGGER = LogManager.getLogger();
     public static final Identifier CONTAINER_ID = id("backpack");
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
@@ -42,11 +37,6 @@ public class Inmis implements ModInitializer {
     @Override
     public void onInitialize() {
         registerBackpacks();
-
-        if (TrinketsMixinPlugin.isTrinketsLoaded) {
-            TrinketSlots.addSlot(SlotGroups.CHEST, Slots.BACKPACK, new Identifier("trinkets", "textures/item/empty_trinket_slot_backpack.png"));
-        }
-
         ServerNetworking.init();
     }
 

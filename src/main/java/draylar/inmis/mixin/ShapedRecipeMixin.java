@@ -4,7 +4,7 @@ import draylar.inmis.item.BackpackItem;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.recipe.ShapedRecipe;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +31,7 @@ public abstract class ShapedRecipeMixin {
             ItemStack newBackpack = this.getOutput().copy();
 
             if(newBackpack.getItem() instanceof BackpackItem) {
-                ListTag oldTag = centerSlot.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+                NbtList oldTag = centerSlot.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
                 newBackpack.getOrCreateTag().put("Inventory", oldTag);
                 cir.setReturnValue(newBackpack);
             }

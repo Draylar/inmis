@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0.6-SNAPSHOT'
+    id 'fabric-loom' version '0.8-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -15,38 +15,39 @@ minecraft {
 
 repositories {
     maven {
-        url = "https://jitpack.io"
-    }
-    maven {
-        name = "NerdHubMC"
-        url = "https://maven.abusedmaster.xyz/"
+        name = "Ladysnake Libs"
+        url = "https://ladysnake.jfrog.io/artifactory/mods"
     }
 
-    maven {url "https://maven.misterpemodder.com/libs-release/"}
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+
+    maven { url "https://maven.misterpemodder.com/libs-release/"}
     maven { url "https://maven.shedaniel.me/" }
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-    modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-    // dev modmenu & REI
-    modCompile "io.github.prospector:modmenu:${project.mod_menu_version}"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // config
-    modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.0.2-beta'
-    include 'com.github.Draylar.omega-config:omega-config-base:1.0.2-beta:min'
+    modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.0.4-beta'
+    include 'com.github.Draylar.omega-config:omega-config-base:1.0.4-beta'
 
     // trinkets
-    modCompile "com.github.emilyploszaj:trinkets:${project.trinkets_version}"
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 
     // Shulker Box Tooltip
     modCompileOnly modRuntime("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {
+        exclude group: "io.github.prospector"
         exclude group: "me.shedaniel.cloth"
     }
-    modCompileOnly modRuntime("me.shedaniel.cloth:cloth-config-fabric:4.11.19") {
+    modCompileOnly modRuntime("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
 }
@@ -54,13 +55,8 @@ dependencies {
 processResources {
     inputs.property "version", project.version
 
-    from(sourceSets.main.resources.srcDirs) {
-        include "fabric.mod.json"
+    filesMatching("fabric.mod.json") {
         expand "version": project.version
-    }
-
-    from(sourceSets.main.resources.srcDirs) {
-        exclude "fabric.mod.json"
     }
 }
 
