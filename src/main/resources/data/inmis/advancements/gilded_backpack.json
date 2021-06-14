@@ -20,7 +20,9 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "inmis:gilded_backpack"
+                        "items": [
+                            "inmis:gilded_backpack"
+                            ]
                     }
                 ]
             }
