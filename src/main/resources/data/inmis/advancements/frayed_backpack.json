@@ -21,7 +21,9 @@
             "conditions": {
                 "items": [
                     {
-                        "item": "inmis:frayed_backpack"
+                        "items": [
+                            "inmis:frayed_backpack"
+                            ]
                     }
                 ]
             }
