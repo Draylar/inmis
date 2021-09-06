@@ -31,8 +31,8 @@ public abstract class ShapedRecipeMixin {
             ItemStack newBackpack = this.getOutput().copy();
 
             if(newBackpack.getItem() instanceof BackpackItem) {
-                NbtList oldTag = centerSlot.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
-                newBackpack.getOrCreateTag().put("Inventory", oldTag);
+                NbtList oldTag = centerSlot.getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
+                newBackpack.getOrCreateNbt().put("Inventory", oldTag);
                 cir.setReturnValue(newBackpack);
             }
         }

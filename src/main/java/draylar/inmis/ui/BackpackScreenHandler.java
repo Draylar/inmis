@@ -46,11 +46,11 @@ public class BackpackScreenHandler extends ScreenHandler {
         int rowWidth = tier.getRowWidth();
         int numberOfRows = tier.getNumberOfRows();
 
-        NbtList tag = backpackStack.getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+        NbtList tag = backpackStack.getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
         SimpleInventory inventory = new SimpleInventory(rowWidth * numberOfRows) {
             @Override
             public void markDirty() {
-                backpackStack.getOrCreateTag().put("Inventory", InventoryUtils.toTag(this));
+                backpackStack.getOrCreateNbt().put("Inventory", InventoryUtils.toTag(this));
                 super.markDirty();
             }
         };

@@ -21,7 +21,7 @@ public class InmisPreviewProvider implements PreviewProvider {
     @Override
     public List<ItemStack> getInventory(PreviewContext context) {
         List<ItemStack> stacks = new ArrayList<>();
-        NbtList inventoryTag = context.getStack().getOrCreateTag().getList("Inventory", NbtType.COMPOUND);
+        NbtList inventoryTag = context.getStack().getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
 
         inventoryTag.forEach(element -> {
             NbtCompound stackTag = (NbtCompound) element;
