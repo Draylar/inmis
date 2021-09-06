@@ -3,20 +3,20 @@
 
   "ui.inmis.backpack": "Mochila",
 
-  "item.inmis.baby_backpack": "Mochila Pequena",
-  "item.inmis.ender_pouch": "Bolsa do Ender",
+  "item.inmis.baby_backpack": "Minimochila",
+  "item.inmis.ender_pouch": "Pochete de ender",
 
-  "item.inmis.frayed_backpack": "Mochila Esfarrapada",
-  "item.inmis.plated_backpack": "Mochila Prateada",
-  "item.inmis.gilded_backpack": "Mochila Dourada",
-  "item.inmis.bejeweled_backpack": "Mochila com Joias",
-  "item.inmis.blazing_backpack": "Mochila Ardente",
-  "item.inmis.withered_backpack": "Mochila do Wither",
-  "item.inmis.endless_backpack": "Mochila do Fim",
+  "item.inmis.frayed_backpack": "Mochila barata",
+  "item.inmis.plated_backpack": "Mochila laminada",
+  "item.inmis.gilded_backpack": "Mochila dourada",
+  "item.inmis.bejeweled_backpack": "Mochila ornada",
+  "item.inmis.blazing_backpack": "Mochila ardente",
+  "item.inmis.withered_backpack": "Mochila do Nether",
+  "item.inmis.endless_backpack": "Mochila do fim",
 
-  "inmis.advancement.baby_backpack.title": "Bolsa de Presentes",
-  "inmis.advancement.baby_backpack.description": "Perfeita para festas com presentes!",
+  "inmis.advancement.baby_backpack.title": "Já é um começo",
+  "inmis.advancement.baby_backpack.description": "Perfeita para dar de presente!",
 
   "category.inmis.keybindings": "Inmis",
-  "key.inmis.open_backpack": "Abrir Mochila"
+  "key.inmis.open_backpack": "Abrir mochila"
 }
