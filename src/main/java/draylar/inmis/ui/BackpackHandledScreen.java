@@ -70,7 +70,7 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         this.drawTexture(matrices, x, y + height - 8, 106 + xTextureOffset, 182 + yTextureOffset, 8, 8);
         this.drawTexture(matrices, x + width - 8, y + height - 8, 248 + xTextureOffset, 182 + yTextureOffset, 8, 8);
         
-        Matrix4f matrix = matrices.peek().getModel();
+        Matrix4f matrix = matrices.peek().getPositionMatrix();
         // Sides
         drawTexturedQuad(matrix, x + 8, x + width - 8, y, y + 8, getZOffset(), (114 + xTextureOffset) / 256f, (248 + xTextureOffset) / 256f, (124 + yTextureOffset) / 256f, (132 + yTextureOffset) / 256f);
         drawTexturedQuad(matrix, x + 8, x + width - 8, y + height - 8, y + height, getZOffset(), (114 + xTextureOffset) / 256f, (248 + xTextureOffset) / 256f, (182 + yTextureOffset) / 256f, (190 + yTextureOffset) / 256f);

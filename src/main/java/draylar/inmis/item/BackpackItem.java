@@ -3,6 +3,7 @@ package draylar.inmis.item;
 import draylar.inmis.Inmis;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.ui.BackpackScreenHandler;
+import net.fabricmc.fabric.api.item.v1.FabricItem;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,7 +22,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class BackpackItem extends Item {
+public class BackpackItem extends Item implements FabricItem {
 
     private final BackpackInfo backpack;
 
@@ -67,5 +68,10 @@ public class BackpackItem extends Item {
 
     public BackpackInfo getTier() {
         return backpack;
+    }
+
+    @Override
+    public boolean allowNbtUpdateAnimation(PlayerEntity player, Hand hand, ItemStack oldStack, ItemStack newStack) {
+        return false;
     }
 }
