@@ -1,28 +1,34 @@
 ## Inmis
-![](assets/ui/ItemsTitle.png)
 
-I need more inventory storage... or space. I don't fully remember what the s stands for.
+![](assets/ui/banner.png)
 
-Inmis is a backpack mod! It provides a progression ladder of 6 backpack types, plus 2 extras.
+![](assets/ui/banner_cave.png)
 
-##### Progression tiers:
-- Frayed
-- Plated
-- Gilded
-- Bejeweled
-- Withered
-- Endless
+---
 
-##### Extras:
-- Ender Pouch
-- Baby Backpack
+![](https://img.shields.io/github/stars/Draylar/inmis)
+![](https://img.shields.io/github/license/Draylar/inmis)
 
-![](assets/ui/Recipes.png)
+Inmis is a Backpack mod built for the [Fabric Loader](https://fabricmc.net/). 
+It requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to be installed separately.
+By default, you can right-click a Backpack to open it, or press `B` to open the first Backpack available in your inventory.
+Backpacks can be equipped in the Chestplate armor slot and opened through the same keybind.
 
-### Installation
+### Compatibility
 
-Inmis is a mod built for the [Fabric Loader](https://fabricmc.net/). It requires [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) to be installed separately; all other dependencies are installed with the mod. 
+If you install [Trinkets](https://www.curseforge.com/minecraft/mc-mods/trinkets-fabric) alongside Inmis, you will be able to equip Inmis Backpacks in the backpack Trinket slot.
 
-### License
+For previewing Backpacks, try out [ShulkerBoxTooltip](https://www.curseforge.com/minecraft/mc-mods/shulkerboxtooltip)!
 
-Inmis is licensed under the MIT ~~unless I don't like you~~ license. Feel free to utilize the mod and the contents in this repo in your own projects.
+### Configuration ⚙
+
+Inmis is fully configurable through the `config/inmis.json` file found in your game directory. 
+This will allow to you disable main-inventory backpacks, require players to wear Backpacks in armor slots, and even allows you to add your own custom backpacks!
+
+### License 📃
+
+Inmis is licensed under the MIT license. 
+
+---
+
+![](assets/ui/Items.png)
