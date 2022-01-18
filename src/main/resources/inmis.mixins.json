@@ -6,7 +6,8 @@
     "PlayerDropMixin",
     "PlayerInventoryScreenMixin",
     "ShapedRecipeMixin",
-    "SoundEventAccessor"
+    "SoundEventAccessor",
+    "client.PlayerEntityFeatureMixin"
   ],
   "client": [
     "ItemStackMixin"

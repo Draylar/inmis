@@ -1,6 +1,8 @@
 package draylar.inmis;
 
+import dev.emi.trinkets.api.client.TrinketRendererRegistry;
 import draylar.inmis.client.InmisKeybinds;
+import draylar.inmis.client.TrinketBackpackRenderer;
 import draylar.inmis.ui.BackpackHandledScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -18,6 +20,10 @@ public class InmisClient implements ClientModInitializer {
         InmisKeybinds.initialize();
 
         Inmis.BACKPACKS.forEach(backpack -> {
+            if(Inmis.TRINKETS_LOADED) {
+                TrinketRendererRegistry.registerRenderer(backpack, new TrinketBackpackRenderer());
+            }
+
             if(backpack instanceof DyeableItem dyeableItem) {
                 ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
                     if(tintIndex > 0) {
