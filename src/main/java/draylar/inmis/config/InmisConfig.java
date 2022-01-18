@@ -11,7 +11,7 @@ import java.util.List;
 public class InmisConfig implements Config {
     public List<BackpackInfo> backpacks = Arrays.asList(
             BackpackInfo.of("baby", 3, 1, false, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER),
-            BackpackInfo.of("frayed", 9, 1, false, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER),
+            BackpackInfo.of("frayed", 9, 1, false, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, true),
             BackpackInfo.of("plated", 9, 2, false, SoundEvents.ITEM_ARMOR_EQUIP_IRON),
             BackpackInfo.of("gilded", 9, 3, false, SoundEvents.ITEM_ARMOR_EQUIP_GOLD),
             BackpackInfo.of("bejeweled", 9, 5, false, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND),

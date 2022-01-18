@@ -16,6 +16,7 @@ public class BackpackInfo {
     private final int rowWidth;
     private final int numberOfRows;
     private final boolean isFireImmune;
+    private final boolean dyeable;
     private String openSound;
 
     /**
@@ -32,6 +33,16 @@ public class BackpackInfo {
         this.numberOfRows = numberOfRows;
         this.isFireImmune = isFireImmune;
         this.openSound = openSound;
+        this.dyeable = false;
+    }
+
+    public BackpackInfo(String name, int rowWidth, int numberOfRows, boolean isFireImmune, String openSound, boolean dyeable) {
+        this.name = name;
+        this.rowWidth = rowWidth;
+        this.numberOfRows = numberOfRows;
+        this.isFireImmune = isFireImmune;
+        this.openSound = openSound;
+        this.dyeable = dyeable;
     }
 
     public String getName() {
@@ -58,6 +69,10 @@ public class BackpackInfo {
         this.openSound = sound;
     }
 
+    public boolean isDyeable() {
+        return dyeable;
+    }
+
     /**
      * Creates a new BackpackInfo instance.
      *
@@ -67,5 +82,9 @@ public class BackpackInfo {
      */
     public static BackpackInfo of(String name, int rowWidth, int numberOfRows, boolean isFireImmune, SoundEvent openSound) {
         return new BackpackInfo(name, rowWidth, numberOfRows, isFireImmune, ((SoundEventAccessor) openSound).getId().toString());
+    }
+
+    public static BackpackInfo of(String name, int rowWidth, int numberOfRows, boolean isFireImmune, SoundEvent openSound, boolean dyeable) {
+        return new BackpackInfo(name, rowWidth, numberOfRows, isFireImmune, ((SoundEventAccessor) openSound).getId().toString(), dyeable);
     }
 }

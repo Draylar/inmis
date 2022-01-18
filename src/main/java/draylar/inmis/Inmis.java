@@ -3,9 +3,7 @@ package draylar.inmis;
 import dev.emi.trinkets.api.TrinketsApi;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.config.InmisConfig;
-import draylar.inmis.item.BackpackItem;
-import draylar.inmis.item.EnderBackpackItem;
-import draylar.inmis.item.TrinketBackpackItem;
+import draylar.inmis.item.*;
 import draylar.inmis.mixin.trinkets.TrinketsMixinPlugin;
 import draylar.inmis.network.ServerNetworking;
 import draylar.inmis.ui.BackpackScreenHandler;
@@ -42,7 +40,7 @@ public class Inmis implements ModInitializer {
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
     public static final InmisConfig CONFIG = OmegaConfig.register(InmisConfig.class);
     public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = ScreenHandlerRegistry.registerExtended(CONTAINER_ID, BackpackScreenHandler::new);
-    public static final List<Item> BACKPACKS = new ArrayList<>();
+    public static final List<BackpackItem> BACKPACKS = new ArrayList<>();
     public static final Item ENDER_POUCH = Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());
 
     @Override
@@ -81,7 +79,14 @@ public class Inmis implements ModInitializer {
                 }
             }
 
-            BackpackItem item = (TRINKETS_LOADED && CONFIG.enableTrinketCompatibility) ? new TrinketBackpackItem(backpack, settings) : new BackpackItem(backpack, settings);
+
+            BackpackItem item;
+            if(TRINKETS_LOADED && CONFIG.enableTrinketCompatibility) {
+                item = backpack.isDyeable() ?  new DyeableTrinketBackpackItem(backpack, settings) : new TrinketBackpackItem(backpack, settings);
+            } else {
+                item = backpack.isDyeable() ?  new DyeableBackpackItem(backpack, settings) : new BackpackItem(backpack, settings);
+            }
+
             BackpackItem registered = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), item);
             BACKPACKS.add(registered);
 
