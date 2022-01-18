@@ -1,5 +1,6 @@
 package draylar.inmis;
 
+import dev.emi.trinkets.api.TrinketsApi;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.config.InmisConfig;
 import draylar.inmis.item.BackpackItem;
@@ -10,7 +11,10 @@ import draylar.inmis.ui.BackpackScreenHandler;
 import draylar.omegaconfig.OmegaConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.fabricmc.fabric.api.util.TriState;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -32,19 +36,25 @@ public class Inmis implements ModInitializer {
     public static final InmisConfig CONFIG = OmegaConfig.register(InmisConfig.class);
     public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = ScreenHandlerRegistry.registerExtended(CONTAINER_ID, BackpackScreenHandler::new);
     public static final List<Item> BACKPACKS = new ArrayList<>();
-    public static final Item ENDER_POUCH = Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());;
+    public static final Item ENDER_POUCH = Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());
 
     @Override
     public void onInitialize() {
         registerBackpacks();
         ServerNetworking.init();
+        setupTrinkets();
     }
 
     private void registerBackpacks() {
         InmisConfig defaultConfig = new InmisConfig();
 
         for (BackpackInfo backpack : Inmis.CONFIG.backpacks) {
-            Item.Settings settings = new Item.Settings().group(Inmis.GROUP).maxCount(1);
+            FabricItemSettings settings = new FabricItemSettings().group(Inmis.GROUP).maxCount(1);
+
+            // If this config option is true, allow players to place backpacks inside the chest slot in their armor inventory.
+            if(Inmis.CONFIG.allowBackpacksInChestplate) {
+                settings.equipmentSlot(stack -> EquipmentSlot.CHEST);
+            }
 
             // setup fireproof item settings
             if(backpack.isFireImmune()) {
@@ -66,6 +76,18 @@ public class Inmis implements ModInitializer {
 
             BackpackItem registered = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
             BACKPACKS.add(registered);
+        }
+    }
+
+    private void setupTrinkets() {
+        if (TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
+            TrinketsApi.registerTrinketPredicate(Inmis.id("any_backpack"), (stack, slot, entity) -> {
+                if(stack.getItem() instanceof BackpackItem || stack.getItem() instanceof EnderBackpackItem) {
+                    return TriState.TRUE;
+                }
+
+                return TriState.DEFAULT;
+            });
         }
     }
 

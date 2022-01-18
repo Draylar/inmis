@@ -33,12 +33,11 @@ public class ServerNetworking {
     }
 
     private static void receiveOpenBackpackPacket(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        if (TrinketsMixinPlugin.isTrinketsLoaded) {
+        if (TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
             Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
             // Iterate over the player's Trinket inventory.
             // Once a backpack has been found, open it.
-            // TODO: HOW DOES THIS WORK WHEN TRINKETS IS NOT INSTALLED???
             if(component.isPresent()) {
                 List<Pair<SlotReference, ItemStack>> allEquipped = component.get().getAllEquipped();
                 for(Pair<SlotReference, ItemStack> entry : allEquipped) {
@@ -50,7 +49,12 @@ public class ServerNetworking {
             }
         }
 
-        ItemStack firstBackpackItemStack = Stream.concat(player.getInventory().offHand.stream(), player.getInventory().main.stream())
+        // Depending on whether the "disallow main inventory backpacks" option is set, either look through all inventory slots, or only the player's armor slots.
+        Stream<ItemStack> inventoryItems = !Inmis.CONFIG.requireArmorTrinketToOpen
+                ? Stream.concat(Stream.concat(player.getInventory().offHand.stream(), player.getInventory().main.stream()), player.getInventory().armor.stream())
+                : player.getInventory().armor.stream();
+
+        ItemStack firstBackpackItemStack = inventoryItems
                 .filter((itemStack) -> itemStack.getItem() instanceof BackpackItem)
                 .findFirst()
                 .orElse(ItemStack.EMPTY);

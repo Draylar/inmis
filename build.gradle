@@ -36,11 +36,11 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // config
-    modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.1.0-1.17'
-    include 'com.github.Draylar.omega-config:omega-config-base:1.1.0-1.17'
+    modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.2.3-1.18.1'
+    include 'com.github.Draylar.omega-config:omega-config-base:1.2.3-1.18.1'
 
     // trinkets
-    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
+    modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
 
     // Shulker Box Tooltip
     modCompileOnly modRuntime("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {
@@ -71,6 +71,7 @@ java {
     // If you remove this line, sources will not be generated.
     withSourcesJar()
 }
+
 jar {
     from("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}

@@ -2,6 +2,7 @@ package draylar.inmis.config;
 
 import draylar.omegaconfig.api.Comment;
 import draylar.omegaconfig.api.Config;
+import draylar.omegaconfig.api.Syncing;
 import net.minecraft.sound.SoundEvents;
 
 import java.util.Arrays;
@@ -26,6 +27,15 @@ public class InmisConfig implements Config {
 
     @Comment(value = "Whether Backpacks should play a sound when opened.")
     public boolean playSound = true;
+
+    @Syncing
+    @Comment(value = "If true, players will not be able to open Backpacks by right-clicking. This will require the player to open backpacks as a Trinket or Armor slot item with the bound key.")
+    public boolean requireArmorTrinketToOpen = false;
+
+    public boolean allowBackpacksInChestplate = true;
+
+    @Comment(value = "If this value is set to false, players will not be able to equip or open backpacks in a Trinkets slot.")
+    public boolean enableTrinketCompatibility = true;
 
     @Override
     public String getName() {

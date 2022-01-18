@@ -33,16 +33,24 @@ public class BackpackItem extends Item implements FabricItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.setCurrentHand(hand);
 
-        if(Inmis.CONFIG.playSound) {
-            if (world.isClient) {
-                world.playSound(user, user.getBlockPos(), Registry.SOUND_EVENT.get(new Identifier(backpack.getOpenSound())), SoundCategory.PLAYERS, 1, 1);
+        // Only allow the user to open the backpack with right-click if the disableInteractOpening option is false.
+        // This option is synced S2C through OmegaConfig, which is why we can bundle client & server calls inside the same config check.
+        if(!Inmis.CONFIG.requireArmorTrinketToOpen) {
+            user.setCurrentHand(hand);
+
+            // Play an opening sound on the client as long as the config option is set.
+            if(Inmis.CONFIG.playSound) {
+                if(world.isClient) {
+                    world.playSound(user, user.getBlockPos(), Registry.SOUND_EVENT.get(new Identifier(backpack.getOpenSound())), SoundCategory.PLAYERS, 1, 1);
+                }
             }
+
+            openScreen(user, user.getStackInHand(hand));
+            return TypedActionResult.success(user.getStackInHand(hand));
         }
 
-        openScreen(user, user.getStackInHand(hand));
-        return TypedActionResult.success(user.getStackInHand(hand));
+        return TypedActionResult.pass(user.getStackInHand(hand));
     }
 
     public static void openScreen(PlayerEntity player, ItemStack backpackItemStack) {
