@@ -19,7 +19,13 @@ public class InmisClient implements ClientModInitializer {
 
         Inmis.BACKPACKS.forEach(backpack -> {
             if(backpack instanceof DyeableItem dyeableItem) {
-                ColorProviderRegistry.ITEM.register((stack, tintIndex) -> tintIndex > 0 ? -1 : dyeableItem.getColor(stack), backpack);
+                ColorProviderRegistry.ITEM.register((stack, tintIndex) -> {
+                    if(tintIndex > 0) {
+                        return -1;
+                    } else {
+                        return dyeableItem.getColor(stack);
+                    }
+                }, backpack);
             }
         });
     }
