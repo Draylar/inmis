@@ -3,6 +3,7 @@
   "package": "draylar.inmis.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
+    "PlayerDropMixin",
     "PlayerInventoryScreenMixin",
     "ShapedRecipeMixin",
     "SoundEventAccessor"

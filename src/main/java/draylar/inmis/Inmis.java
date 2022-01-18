@@ -120,6 +120,24 @@ public class Inmis implements ModInitializer {
         return true;
     }
 
+    public static List<ItemStack> getBackpackContents(ItemStack stack) {
+        List<ItemStack> stacks = new ArrayList<>();
+        NbtList tag = stack.getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
+
+        // If any inventory element in the Backpack stack is non-empty, return false;
+        for (NbtElement element : tag) {
+            NbtCompound stackTag = (NbtCompound) element;
+            ItemStack backpackStack = ItemStack.fromNbt(stackTag.getCompound("Stack"));
+            stacks.add(backpackStack);
+        }
+
+        return stacks;
+    }
+
+    public static void wipeBackpack(ItemStack stack) {
+        stack.getOrCreateNbt().remove("Inventory");
+    }
+
     public static Identifier id(String name) {
         return new Identifier("inmis", name);
     }
