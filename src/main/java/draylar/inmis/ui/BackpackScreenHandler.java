@@ -7,10 +7,13 @@ import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.item.BackpackItem;
 import draylar.inmis.util.InventoryUtils;
 import net.fabricmc.fabric.api.util.NbtType;
+import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtList;
@@ -47,7 +50,7 @@ public class BackpackScreenHandler extends ScreenHandler {
         int numberOfRows = tier.getNumberOfRows();
 
         NbtList tag = backpackStack.getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
-        SimpleInventory inventory = new SimpleInventory(rowWidth * numberOfRows) {
+        BackpackInventory inventory = new BackpackInventory(rowWidth * numberOfRows) {
             @Override
             public void markDirty() {
                 backpackStack.getOrCreateNbt().put("Inventory", InventoryUtils.toTag(this));
@@ -149,8 +152,11 @@ public class BackpackScreenHandler extends ScreenHandler {
             }
 
             // Do not allow players to insert shulkers into backpacks.
-            if(Inmis.CONFIG.disableShulkers && stack.getItem().equals(Items.SHULKER_BOX)) {
-                return false;
+            if(Inmis.CONFIG.disableShulkers && inventory instanceof BackpackInventory) {
+                Item item = stack.getItem();
+                if(item instanceof BlockItem blockItem) {
+                    return !(blockItem.getBlock() instanceof ShulkerBoxBlock);
+                }
             }
 
             return stackMovementIsAllowed(stack);
@@ -158,6 +164,13 @@ public class BackpackScreenHandler extends ScreenHandler {
 
         private boolean stackMovementIsAllowed(ItemStack stack) {
             return !(stack.getItem() instanceof BackpackItem) && stack != backpackStack;
+        }
+    }
+
+    public static class BackpackInventory extends SimpleInventory {
+
+        public BackpackInventory(int slots) {
+            super(slots);
         }
     }
 }
