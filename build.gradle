@@ -40,7 +40,7 @@ dependencies {
     include 'com.github.Draylar.omega-config:omega-config-base:1.2.3-1.18.1'
 
     // trinkets
-    modCompileOnly "dev.emi:trinkets:${project.trinkets_version}"
+    modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 
     // Shulker Box Tooltip
     modCompileOnly modRuntime("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {

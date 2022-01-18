@@ -34,8 +34,13 @@ public class InmisConfig implements Config {
 
     public boolean allowBackpacksInChestplate = true;
 
+    @Syncing
     @Comment(value = "If this value is set to false, players will not be able to equip or open backpacks in a Trinkets slot.")
     public boolean enableTrinketCompatibility = true;
+
+    @Syncing
+    @Comment(value = "If true, players will not be able to take backpacks out of armor/trinket slots if the backpack is not empty.")
+    public boolean requireEmptyForUnequip = false;
 
     @Override
     public String getName() {

@@ -5,6 +5,7 @@ import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.config.InmisConfig;
 import draylar.inmis.item.BackpackItem;
 import draylar.inmis.item.EnderBackpackItem;
+import draylar.inmis.item.TrinketBackpackItem;
 import draylar.inmis.mixin.trinkets.TrinketsMixinPlugin;
 import draylar.inmis.network.ServerNetworking;
 import draylar.inmis.ui.BackpackScreenHandler;
@@ -13,11 +14,16 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.fabricmc.fabric.api.util.TriState;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtList;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -30,6 +36,7 @@ import java.util.Optional;
 
 public class Inmis implements ModInitializer {
 
+    public static final boolean TRINKETS_LOADED = FabricLoader.getInstance().isModLoaded("trinkets");
     public static final Logger LOGGER = LogManager.getLogger();
     public static final Identifier CONTAINER_ID = id("backpack");
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
@@ -74,13 +81,20 @@ public class Inmis implements ModInitializer {
                 }
             }
 
-            BackpackItem registered = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), new BackpackItem(backpack, settings));
+            BackpackItem item = (TRINKETS_LOADED && CONFIG.enableTrinketCompatibility) ? new TrinketBackpackItem(backpack, settings) : new BackpackItem(backpack, settings);
+            BackpackItem registered = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), item);
             BACKPACKS.add(registered);
+
+            // Register to the TrinketsApi if both conditions are true.
+            // This allows TrinketBackpackItem to handle API events (namely canUnequip).
+            if(TRINKETS_LOADED && CONFIG.enableTrinketCompatibility) {
+                TrinketsApi.registerTrinket(item, (TrinketBackpackItem) item);
+            }
         }
     }
 
     private void setupTrinkets() {
-        if (TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
+        if(TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
             TrinketsApi.registerTrinketPredicate(Inmis.id("any_backpack"), (stack, slot, entity) -> {
                 if(stack.getItem() instanceof BackpackItem || stack.getItem() instanceof EnderBackpackItem) {
                     return TriState.TRUE;
@@ -89,6 +103,21 @@ public class Inmis implements ModInitializer {
                 return TriState.DEFAULT;
             });
         }
+    }
+
+    public static boolean isBackpackEmpty(ItemStack stack) {
+        NbtList tag = stack.getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
+
+        // If any inventory element in the Backpack stack is non-empty, return false;
+        for (NbtElement element : tag) {
+            NbtCompound stackTag = (NbtCompound) element;
+            ItemStack backpackStack = ItemStack.fromNbt(stackTag.getCompound("Stack"));
+            if(!backpackStack.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public static Identifier id(String name) {
