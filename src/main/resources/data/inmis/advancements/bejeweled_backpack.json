@@ -1,10 +1,10 @@
 {
     "display": {
         "title": {
-            "text": "Cover Me With Various Gems"
+            "translate": "inmis.advancement.bejeweled_backpack.title"
         },
         "description": {
-            "text": "Stick some rare gems on your Gilded Backpack to make it even shinier!"
+            "translate": "inmis.advancement.bejeweled_backpack.description"
         },
         "icon": {
             "item": "inmis:bejeweled_backpack"

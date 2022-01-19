@@ -1,10 +1,10 @@
 {
     "display": {
         "title": {
-            "text": "Leveling Up"
+            "translate": "inmis.advancement.plated_backpack.title"
         },
         "description": {
-            "text": "Surround your Frayed Backpack with Iron Ingots to expand its storage capabilities."
+            "translate": "inmis.advancement.plated_backpack.description"
         },
         "icon": {
             "item": "inmis:plated_backpack"
@@ -22,7 +22,7 @@
                     {
                         "items": [
                             "inmis:plated_backpack"
-                            ]
+                        ]
                     }
                 ]
             }

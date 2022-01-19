@@ -1,10 +1,10 @@
 {
     "display": {
         "title": {
-            "text": "The End"
+            "translate": "inmis.advancement.endless_backpack.title"
         },
         "description": {
-            "text": "Obtain the ultimate backpack, fueled by the power of The End."
+            "translate": "inmis.advancement.endless_backpack.description"
         },
         "icon": {
             "item": "inmis:endless_backpack"

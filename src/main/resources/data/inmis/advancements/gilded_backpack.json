@@ -1,10 +1,10 @@
 {
     "display": {
         "title": {
-            "text": "Gilded Expansions"
+            "translate": "inmis.advancement.gilded_backpack.title"
         },
         "description": {
-            "text": "Enhance your Plated Backpack by plating it with gold. Shiny!"
+            "translate": "inmis.advancement.gilded_backpack.description"
         },
         "icon": {
             "item": "inmis:gilded_backpack"
@@ -22,7 +22,7 @@
                     {
                         "items": [
                             "inmis:gilded_backpack"
-                            ]
+                        ]
                     }
                 ]
             }
