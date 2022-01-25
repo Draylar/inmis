@@ -22,7 +22,7 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
     private final static int INVENTORY_LABEL_EXTRA = 8;
     
     public BackpackHandledScreen(BackpackScreenHandler handler, PlayerInventory player, Text title) {
-        super(handler, player, title);
+        super(handler, player, handler.getBackpackStack().getName());
         
         Dimension dimension = handler.getDimension();
         this.backgroundWidth = dimension.getWidth();

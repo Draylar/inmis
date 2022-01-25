@@ -103,7 +103,11 @@ public class BackpackScreenHandler extends ScreenHandler {
     public boolean canUse(PlayerEntity player) {
         return backpackStack.getItem() instanceof BackpackItem;
     }
-    
+
+    public ItemStack getBackpackStack() {
+        return backpackStack;
+    }
+
     @Override
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
