@@ -1,8 +1,8 @@
 package draylar.inmis;
 
-import dev.emi.trinkets.api.client.TrinketRendererRegistry;
+import draylar.inmis.api.TrinketCompat;
 import draylar.inmis.client.InmisKeybinds;
-import draylar.inmis.client.TrinketBackpackRenderer;
+import draylar.inmis.item.BackpackItem;
 import draylar.inmis.ui.BackpackHandledScreen;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -19,9 +19,9 @@ public class InmisClient implements ClientModInitializer {
         ScreenRegistry.register(Inmis.CONTAINER_TYPE, BackpackHandledScreen::new);
         InmisKeybinds.initialize();
 
-        Inmis.BACKPACKS.forEach(backpack -> {
+        for (BackpackItem backpack : Inmis.BACKPACKS) {
             if(Inmis.TRINKETS_LOADED) {
-                TrinketRendererRegistry.registerRenderer(backpack, new TrinketBackpackRenderer());
+                TrinketCompat.registerTrinketRenderer(backpack);
             }
 
             if(backpack instanceof DyeableItem dyeableItem) {
@@ -33,6 +33,6 @@ public class InmisClient implements ClientModInitializer {
                     }
                 }, backpack);
             }
-        });
+        }
     }
 }

@@ -1,7 +1,7 @@
 package draylar.inmis.mixin;
 
-import dev.emi.trinkets.api.TrinketsApi;
 import draylar.inmis.Inmis;
+import draylar.inmis.api.TrinketCompat;
 import draylar.inmis.item.BackpackItem;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -21,7 +21,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerDropMixin extends LivingEntity {
@@ -41,17 +40,7 @@ public abstract class PlayerDropMixin extends LivingEntity {
 
                 // Trinkets
                 if(Inmis.TRINKETS_LOADED) {
-                    TrinketsApi.getTrinketComponent(this).ifPresent(component -> {
-                        component.getAllEquipped().forEach(pair -> {
-                            ItemStack stack = pair.getRight();
-                            if(stack.getItem() instanceof BackpackItem) {
-                                Inmis.getBackpackContents(stack).forEach(backpackItem -> dropItem(backpackItem, true, false));
-                                Inmis.wipeBackpack(stack);
-                                dropItem(stack, true, false);
-                                pair.getLeft().inventory().clear();
-                            }
-                        });
-                    });
+                    TrinketCompat.spillTrinketInventory((PlayerEntity) (Object) this);
                 }
             }
 

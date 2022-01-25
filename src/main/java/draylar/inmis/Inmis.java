@@ -1,6 +1,6 @@
 package draylar.inmis;
 
-import dev.emi.trinkets.api.TrinketsApi;
+import draylar.inmis.api.TrinketCompat;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.config.InmisConfig;
 import draylar.inmis.item.*;
@@ -13,7 +13,6 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.fabricmc.fabric.api.util.NbtType;
-import net.fabricmc.fabric.api.util.TriState;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
@@ -82,9 +81,9 @@ public class Inmis implements ModInitializer {
 
             BackpackItem item;
             if(TRINKETS_LOADED && CONFIG.enableTrinketCompatibility) {
-                item = backpack.isDyeable() ?  new DyeableTrinketBackpackItem(backpack, settings) : new TrinketBackpackItem(backpack, settings);
+                item = TrinketCompat.createTrinketBackpack(backpack, settings);
             } else {
-                item = backpack.isDyeable() ?  new DyeableBackpackItem(backpack, settings) : new BackpackItem(backpack, settings);
+                item = backpack.isDyeable() ? new DyeableBackpackItem(backpack, settings) : new BackpackItem(backpack, settings);
             }
 
             BackpackItem registered = Registry.register(Registry.ITEM, new Identifier("inmis", backpack.getName().toLowerCase() + "_backpack"), item);
@@ -93,20 +92,14 @@ public class Inmis implements ModInitializer {
             // Register to the TrinketsApi if both conditions are true.
             // This allows TrinketBackpackItem to handle API events (namely canUnequip).
             if(TRINKETS_LOADED && CONFIG.enableTrinketCompatibility) {
-                TrinketsApi.registerTrinket(item, (TrinketBackpackItem) item);
+                TrinketCompat.registerTrinketBackpack(item);
             }
         }
     }
 
     private void setupTrinkets() {
         if(TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
-            TrinketsApi.registerTrinketPredicate(Inmis.id("any_backpack"), (stack, slot, entity) -> {
-                if(stack.getItem() instanceof BackpackItem || stack.getItem() instanceof EnderBackpackItem) {
-                    return TriState.TRUE;
-                }
-
-                return TriState.DEFAULT;
-            });
+            TrinketCompat.registerTrinketPredicate();
         }
     }
 
