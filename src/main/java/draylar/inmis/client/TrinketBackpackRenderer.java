@@ -2,6 +2,7 @@ package draylar.inmis.client;
 
 import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.client.TrinketRenderer;
+import draylar.inmis.Inmis;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -16,6 +17,10 @@ public class TrinketBackpackRenderer implements TrinketRenderer {
 
     @Override
     public void render(ItemStack stack, SlotReference slotReference, EntityModel<? extends LivingEntity> contextModel, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, LivingEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+        if(!Inmis.CONFIG.trinketRendering) {
+            return;
+        }
+
         matrices.push();
 
         // Initial transformation

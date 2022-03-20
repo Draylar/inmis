@@ -48,6 +48,9 @@ public class InmisConfig implements Config {
     @Comment(value = "If true, backpacks in main inventory slots will empty out into the world (scatter contents) when the player dies.")
     public boolean spillMainBackpacksOnDeath = false;
 
+    @Comment(value = "Set this value to false to disable Backpack rendering when using Trinkets.")
+    public boolean trinketRendering = true;
+
     @Override
     public String getName() {
         return "inmis";
