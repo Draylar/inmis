@@ -10,9 +10,6 @@ archivesBaseName = project.archives_base_name
 version = project.mod_version + "-" + project.minecraft_version
 group = project.maven_group
 
-minecraft {
-}
-
 repositories {
     maven {
         name = "Ladysnake Libs"
@@ -36,19 +33,21 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // config
-    modImplementation 'com.github.Draylar.omega-config:omega-config-base:1.2.3-1.18.1'
-    include 'com.github.Draylar.omega-config:omega-config-base:1.2.3-1.18.1'
+    modImplementation include ('com.github.Draylar.omega-config:omega-config-base:1.2.3-1.18.1') {
+        exclude group: "net.fabricmc.fabric-api"
+    }
 
     // trinkets
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 
     // Shulker Box Tooltip
-    modCompileOnly modRuntime("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {
+    modCompileOnly modRuntimeOnly("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {
         exclude group: "io.github.prospector"
         exclude group: "me.shedaniel.cloth"
+        exclude group: "net.fabricmc.fabric-api"
     }
-    modCompileOnly modRuntime("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
+    modCompileOnly modRuntimeOnly("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+        exclude group: "net.fabricmc.fabric-api"
     }
 }
 
