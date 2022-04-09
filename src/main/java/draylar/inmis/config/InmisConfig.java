@@ -51,6 +51,9 @@ public class InmisConfig implements Config {
     @Comment(value = "Set this value to false to disable Backpack rendering when using Trinkets.")
     public boolean trinketRendering = true;
 
+    @Comment(value = "Color of the text rendered in the INMIS GUI.")
+    public String guiTitleColor = "0x404040";
+
     @Override
     public String getName() {
         return "inmis";

@@ -1,6 +1,7 @@
 package draylar.inmis.ui;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import draylar.inmis.Inmis;
 import draylar.inmis.api.Dimension;
 import draylar.inmis.api.Rectangle;
 import net.minecraft.client.MinecraftClient;
@@ -16,11 +17,14 @@ import net.minecraft.util.math.Matrix4f;
 public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> {
 
     private static final Identifier GUI_TEXTURE = new Identifier("inmis", "textures/gui/backpack_container.png");
+    private static final Identifier SLOT_TEXTURE = new Identifier("inmis", "textures/gui/backpack_slot.png");
+
     private final static int TOP_OFFSET = 24;
     private final static int SLOT_SIZE = 18;
     private final static int WIDTH_PADDING = 14;
     private final static int INVENTORY_LABEL_EXTRA = 8;
-    
+    private final int guiTitleColor = Integer.decode(Inmis.CONFIG.guiTitleColor);
+
     public BackpackHandledScreen(BackpackScreenHandler handler, PlayerInventory player, Text title) {
         super(handler, player, handler.getBackpackStack().getName());
         
@@ -38,9 +42,9 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         int x = (this.width - this.backgroundWidth) / 2;
         int y = (this.height - this.backgroundHeight) / 2;
         renderBackgroundTexture(matrices, new Rectangle(x, y, backgroundWidth, backgroundHeight), delta, 0xFFFFFFFF);
-        RenderSystem.setShaderTexture(0, new Identifier("textures/gui/container/hopper.png"));
+        RenderSystem.setShaderTexture(0, SLOT_TEXTURE);
         for (Slot slot : getScreenHandler().slots) {
-            this.drawTexture(matrices, x + slot.x - 1, y + slot.y - 1, 43, 19, 18, 18);
+            drawTexture(matrices, x + slot.x - 1, y + slot.y - 1, 0, 0, 18, 18, 18, 18);
         }
     }
     
@@ -49,6 +53,12 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
         this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+    }
+
+    @Override
+    public void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
+        textRenderer.draw(matrices, title, (float) titleX, (float) titleY, guiTitleColor);
+        textRenderer.draw(matrices, playerInventoryTitle, (float) playerInventoryTitleX, (float) playerInventoryTitleY, guiTitleColor);
     }
     
     public void renderBackgroundTexture(MatrixStack matrices, Rectangle bounds, float delta, int color) {
