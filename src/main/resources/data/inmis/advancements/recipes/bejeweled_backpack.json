@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "inmis:bejeweled_backpack"
+    ]
+  },
+  "criteria": {
+    "has_gilded_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "inmis:gilded_backpack"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "inmis:bejeweled_backpack"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gilded_backpack",
+      "has_the_recipe"
+    ]
+  ]
+}

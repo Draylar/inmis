@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "inmis:withered_backpack"
+    ]
+  },
+  "criteria": {
+    "has_bejeweled_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "inmis:bejeweled_backpack"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "inmis:withered_backpack"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bejeweled_backpack",
+      "has_the_recipe"
+    ]
+  ]
+}

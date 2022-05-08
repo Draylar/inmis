@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "inmis:plated_backpack"
+    ]
+  },
+  "criteria": {
+    "has_frayed_backpack": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "inmis:frayed_backpack"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "inmis:plated_backpack"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_frayed_backpack",
+      "has_the_recipe"
+    ]
+  ]
+}
