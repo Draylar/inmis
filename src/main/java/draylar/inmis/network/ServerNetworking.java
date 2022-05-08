@@ -33,33 +33,35 @@ public class ServerNetworking {
     }
 
     private static void receiveOpenBackpackPacket(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
-        if (TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
-            Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
+        server.execute(() -> {
+            if (TrinketsMixinPlugin.isTrinketsLoaded && Inmis.CONFIG.enableTrinketCompatibility) {
+                Optional<TrinketComponent> component = TrinketsApi.getTrinketComponent(player);
 
-            // Iterate over the player's Trinket inventory.
-            // Once a backpack has been found, open it.
-            if(component.isPresent()) {
-                List<Pair<SlotReference, ItemStack>> allEquipped = component.get().getAllEquipped();
-                for(Pair<SlotReference, ItemStack> entry : allEquipped) {
-                    if(entry.getRight().getItem() instanceof BackpackItem) {
-                        BackpackItem.openScreen(player, entry.getRight());
-                        return;
+                // Iterate over the player's Trinket inventory.
+                // Once a backpack has been found, open it.
+                if(component.isPresent()) {
+                    List<Pair<SlotReference, ItemStack>> allEquipped = component.get().getAllEquipped();
+                    for(Pair<SlotReference, ItemStack> entry : allEquipped) {
+                        if(entry.getRight().getItem() instanceof BackpackItem) {
+                            BackpackItem.openScreen(player, entry.getRight());
+                            return;
+                        }
                     }
                 }
             }
-        }
 
-        // Depending on whether the "disallow main inventory backpacks" option is set, either look through all inventory slots, or only the player's armor slots.
-        Stream<ItemStack> inventoryItems = !Inmis.CONFIG.requireArmorTrinketToOpen
-                ? Stream.concat(Stream.concat(player.getInventory().offHand.stream(), player.getInventory().main.stream()), player.getInventory().armor.stream())
-                : player.getInventory().armor.stream();
+            // Depending on whether the "disallow main inventory backpacks" option is set, either look through all inventory slots, or only the player's armor slots.
+            Stream<ItemStack> inventoryItems = !Inmis.CONFIG.requireArmorTrinketToOpen
+                    ? Stream.concat(Stream.concat(player.getInventory().offHand.stream(), player.getInventory().main.stream()), player.getInventory().armor.stream())
+                    : player.getInventory().armor.stream();
 
-        ItemStack firstBackpackItemStack = inventoryItems
-                .filter((itemStack) -> itemStack.getItem() instanceof BackpackItem)
-                .findFirst()
-                .orElse(ItemStack.EMPTY);
-        if (firstBackpackItemStack != ItemStack.EMPTY) {
-            BackpackItem.openScreen(player, firstBackpackItemStack);
-        }
+            ItemStack firstBackpackItemStack = inventoryItems
+                    .filter((itemStack) -> itemStack.getItem() instanceof BackpackItem)
+                    .findFirst()
+                    .orElse(ItemStack.EMPTY);
+            if (firstBackpackItemStack != ItemStack.EMPTY) {
+                BackpackItem.openScreen(player, firstBackpackItemStack);
+            }
+        });
     }
 }
