@@ -1,10 +1,10 @@
 {
     "display": {
         "title": {
-            "text": "Backpack Beginnings"
+            "translate": "inmis.advancement.frayed_backpack.title"
         },
         "description": {
-            "text": "It's not much, but it's mine! Craft a Frayed Backpack to expand your inventory space."
+            "translate": "inmis.advancement.frayed_backpack.description"
         },
         "icon": {
             "item": "inmis:frayed_backpack"
@@ -23,7 +23,7 @@
                     {
                         "items": [
                             "inmis:frayed_backpack"
-                            ]
+                        ]
                     }
                 ]
             }
