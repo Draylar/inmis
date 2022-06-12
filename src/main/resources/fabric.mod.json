@@ -30,7 +30,9 @@
     "inmis.trinkets.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.7.8+build.186",
-    "fabric": ">=0.44.0+1.18"
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17"
   }
 }
