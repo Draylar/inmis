@@ -14,7 +14,6 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
@@ -63,7 +62,7 @@ public class BackpackItem extends Item implements FabricItem {
 
                 @Override
                 public Text getDisplayName() {
-                    return new TranslatableText(backpackItemStack.getItem().getTranslationKey());
+                    return Text.translatable(backpackItemStack.getItem().getTranslationKey());
                 }
 
                 @Override
