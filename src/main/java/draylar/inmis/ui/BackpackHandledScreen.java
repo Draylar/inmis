@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import draylar.inmis.Inmis;
 import draylar.inmis.api.Dimension;
 import draylar.inmis.api.Rectangle;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.MatrixStack;
@@ -99,7 +98,6 @@ public class BackpackHandledScreen extends HandledScreen<BackpackScreenHandler> 
         bufferBuilder.vertex(matrices, (float)x1, (float)y1, (float)z).texture(u1, v1).next();
         bufferBuilder.vertex(matrices, (float)x1, (float)y0, (float)z).texture(u1, v0).next();
         bufferBuilder.vertex(matrices, (float)x0, (float)y0, (float)z).texture(u0, v0).next();
-        bufferBuilder.end();
-        BufferRenderer.draw(bufferBuilder);
+        BufferRenderer.drawWithShader(bufferBuilder.end());
     }
 }

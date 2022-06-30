@@ -11,6 +11,7 @@ import draylar.omegaconfig.OmegaConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -38,7 +39,8 @@ public class Inmis implements ModInitializer {
     public static final Identifier CONTAINER_ID = id("backpack");
     public static final ItemGroup GROUP = FabricItemGroupBuilder.build(CONTAINER_ID, () -> new ItemStack(Registry.ITEM.get(id("frayed_backpack"))));
     public static final InmisConfig CONFIG = OmegaConfig.register(InmisConfig.class);
-    public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = ScreenHandlerRegistry.registerExtended(CONTAINER_ID, BackpackScreenHandler::new);
+    //public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = ScreenHandlerRegistry.registerExtended(CONTAINER_ID, BackpackScreenHandler::new);
+    public static final ScreenHandlerType<BackpackScreenHandler> CONTAINER_TYPE = Registry.register(Registry.SCREEN_HANDLER, CONTAINER_ID, new ExtendedScreenHandlerType<>(BackpackScreenHandler::new));
     public static final List<BackpackItem> BACKPACKS = new ArrayList<>();
     public static final Item ENDER_POUCH = Registry.register(Registry.ITEM, id("ender_pouch"), new EnderBackpackItem());
 

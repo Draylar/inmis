@@ -10,16 +10,14 @@ import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class EnderBackpackItem extends Item {
 
-    public static final TranslatableText CONTAINER_NAME = new TranslatableText("container.enderchest");
+    public static final Text CONTAINER_NAME = Text.translatable("container.enderchest");
 
     public EnderBackpackItem() {
         super(new Item.Settings().group(Inmis.GROUP).maxCount(1));
