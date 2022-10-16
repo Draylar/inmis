@@ -11,10 +11,13 @@ public class InventoryUtils {
         NbtList tag = new NbtList();
 
         for(int i = 0; i < inventory.size(); i++) {
-            NbtCompound stackTag = new NbtCompound();
-            stackTag.putInt("Slot", i);
-            stackTag.put("Stack", inventory.getStack(i).writeNbt(new NbtCompound()));
-            tag.add(stackTag);
+            ItemStack stack = inventory.getStack(i);
+            if (!stack.isEmpty()) {
+                NbtCompound stackTag = new NbtCompound();
+                stackTag.putInt("Slot", i);
+                stackTag.put("Stack", stack.writeNbt(new NbtCompound()));
+                tag.add(stackTag);
+            }
         }
 
         return tag;
