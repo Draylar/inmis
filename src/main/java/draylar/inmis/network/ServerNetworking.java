@@ -5,14 +5,20 @@ import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import draylar.inmis.Inmis;
 import draylar.inmis.item.BackpackItem;
+import draylar.inmis.item.EnderBackpackItem;
 import draylar.inmis.mixin.trinkets.TrinketsMixinPlugin;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.stat.Stats;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 
@@ -44,6 +50,12 @@ public class ServerNetworking {
                     for(Pair<SlotReference, ItemStack> entry : allEquipped) {
                         if(entry.getRight().getItem() instanceof BackpackItem) {
                             BackpackItem.openScreen(player, entry.getRight());
+                            return;
+                        } else if (entry.getRight().getItem() instanceof EnderBackpackItem) {
+                            EnderChestInventory enderChestInventory = player.getEnderChestInventory();
+                            player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
+                                GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory), new TranslatableText("container.enderchest");));
+                            player.incrementStat(Stats.OPEN_ENDERCHEST);
                             return;
                         }
                     }
