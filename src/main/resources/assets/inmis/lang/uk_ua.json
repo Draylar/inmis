@@ -1,0 +1,39 @@
+{
+  "itemGroup.inmis.backpack": "Inmis",
+
+  "ui.inmis.backpack": "Рюкзак",
+
+  "item.inmis.baby_backpack": "Рюкзачок",
+  "item.inmis.ender_pouch": "Мішечок Енду",
+
+  "item.inmis.frayed_backpack": "Обшарпаний рюкзак",
+  "item.inmis.plated_backpack": "Залізний рюкзак",
+  "item.inmis.gilded_backpack": "Позолочений рюкзак",
+  "item.inmis.bejeweled_backpack": "Коштовний рюкзак",
+  "item.inmis.blazing_backpack": "Палаючий рюкзак",
+  "item.inmis.withered_backpack": "Візерський рюкзак",
+  "item.inmis.endless_backpack": "Рюкзак Енду",
+
+  "inmis.advancement.baby_backpack.title": "Прекрасна сумка",
+  "inmis.advancement.baby_backpack.description": "Ідеально підходить для подарунків на вечірку!",
+  "inmis.advancement.ender_pouch.title": "Доступ Енду",
+  "inmis.advancement.ender_pouch.description": "Засунувши руку в цю сумку, вона з'явиться у вашій скрині Енду...",
+
+  "inmis.advancement.frayed_backpack.title": "Початок рюкзака",
+  "inmis.advancement.frayed_backpack.description": "Це небагато, але це моє! Змайструйте обшарпаний рюкзак, щоб розширити місце у своєму інвентарі.",
+  "inmis.advancement.plated_backpack.title": "Підвищення рівня",
+  "inmis.advancement.plated_backpack.description": "Покрийте свій обшарпаний рюкзак залізними злитками, щоб розширити його зберігальні можливості.",
+  "inmis.advancement.gilded_backpack.title": "Позолочені розширення",
+  "inmis.advancement.gilded_backpack.description": "Покращте свій залізний рюкзак, покривши його золотом. Блискуче!",
+  "inmis.advancement.bejeweled_backpack.title": "Накрий мене всілякими коштовностями",
+  "inmis.advancement.bejeweled_backpack.description": "Прикріпіть кілька рідкісних коштовностей до свого позолоченого рюкзака, щоб зробити його ще блискучішим!",
+  "inmis.advancement.blazing_backpack.title": "Вогняні альтернативи",
+  "inmis.advancement.blazing_backpack.description": "Покрийте свій рюкзак незеритом, щоб зробити його несприйнятливим до вогню та лави.",
+  "inmis.advancement.withered_backpack.title": "Висушуване роздолля",
+    "inmis.advancement.withered_backpack.description": "Покращте свій блискучий рюкзак трофеєм, отриманим спустошеним королем.",
+  "inmis.advancement.endless_backpack.title": "Кінець",
+  "inmis.advancement.endless_backpack.description": "Отримайте найкращий рюкзак, наповнений силою Енду.",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "Відкрити рюкзак"
+}
