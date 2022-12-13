@@ -20,7 +20,7 @@ public class EnderBackpackItem extends Item {
     public static final Text CONTAINER_NAME = Text.translatable("container.enderchest");
 
     public EnderBackpackItem() {
-        super(new Item.Settings().group(Inmis.GROUP).maxCount(1));
+        super(new Item.Settings().maxCount(1));
     }
 
     @Override

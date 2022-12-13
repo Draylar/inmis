@@ -12,7 +12,7 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 public class BackpackFeature extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
@@ -27,12 +27,12 @@ public class BackpackFeature extends FeatureRenderer<AbstractClientPlayerEntity,
             matrices.push();
 
             // Initial transformation
-            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
             matrices.translate(0, -0.2, -0.25);
 
             // Shifting
             if(player.isSneaking()) {
-                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(25));
+                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(25));
                 matrices.translate(0, -0.2, 0);
             }
 
