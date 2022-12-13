@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -17,7 +18,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,7 +41,7 @@ public class BackpackItem extends Item implements FabricItem {
             // Play an opening sound on the client as long as the config option is set.
             if(Inmis.CONFIG.playSound) {
                 if(world.isClient) {
-                    world.playSound(user, user.getBlockPos(), Registry.SOUND_EVENT.get(new Identifier(backpack.getOpenSound())), SoundCategory.PLAYERS, 1, 1);
+                    world.playSound(user, user.getBlockPos(), Registries.SOUND_EVENT.get(new Identifier(backpack.getOpenSound())), SoundCategory.PLAYERS, 1, 1);
                 }
             }
 

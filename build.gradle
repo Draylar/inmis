@@ -41,7 +41,7 @@ dependencies {
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
 
     // Shulker Box Tooltip
-    modCompileOnly modRuntimeOnly("com.misterpemodder:shulkerboxtooltip:${project.shulker_box_tooltip_version}") {
+    modCompileOnly modRuntimeOnly("com.misterpemodder:shulkerboxtooltip-fabric:${project.shulker_box_tooltip_version}") {
         exclude group: "io.github.prospector"
         exclude group: "me.shedaniel.cloth"
         exclude group: "net.fabricmc.fabric-api"
