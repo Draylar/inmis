@@ -3,19 +3,36 @@
 
   "ui.inmis.backpack": "背包",
 
-  "item.inmis.baby_backpack": "Baby 背包",
-  "item.inmis.ender_pouch": "末影背包",
+  "item.inmis.baby_backpack": "幼小背包",
+  "item.inmis.ender_pouch": "末影袋",
 
   "item.inmis.frayed_backpack": "皮革背包",
-  "item.inmis.plated_backpack": "铁背包",
-  "item.inmis.gilded_backpack": "金背包",
+  "item.inmis.plated_backpack": "铁制背包",
+  "item.inmis.gilded_backpack": "镀金背包",
   "item.inmis.bejeweled_backpack": "宝石背包",
   "item.inmis.blazing_backpack": "烈焰背包",
   "item.inmis.withered_backpack": "凋零背包",
-  "item.inmis.endless_backpack": "终界背包",
-  
-  "inmis.advancement.baby_backpack.title": "红包?",
-  "inmis.advancement.baby_backpack.description": "你今年收到红包了吗？",
+  "item.inmis.endless_backpack": "最终背包",
+
+  "inmis.advancement.baby_backpack.title": "礼包",
+  "inmis.advancement.baby_backpack.description": "完美的派对礼品！",
+  "inmis.advancement.ender_pouch.title": "末影访问",
+  "inmis.advancement.ender_pouch.description": "把手伸进这个袋子里它将会出现在你的末影箱里……",
+
+  "inmis.advancement.frayed_backpack.title": "背包的开始",
+  "inmis.advancement.frayed_backpack.description": "这不是很多，但它是我的！制作一个皮革背包来扩大你的物品栏空间。",
+  "inmis.advancement.plated_backpack.title": "升级",
+  "inmis.advancement.plated_backpack.description": "用铁锭围住你的皮革背包，以扩大其储存能力。",
+  "inmis.advancement.gilded_backpack.title": "镀金扩展",
+  "inmis.advancement.gilded_backpack.description": "通过镀金来增强您的铁制背包。闪闪发光！",
+  "inmis.advancement.bejeweled_backpack.title": "用各种宝石围住我",
+  "inmis.advancement.bejeweled_backpack.description": "在你的镀金背包上贴上一些稀有的宝石，使其更加闪亮！",
+  "inmis.advancement.blazing_backpack.title": "火热的替代品",
+  "inmis.advancement.blazing_backpack.description": "给你的背包装上下届合金锭，使其对火和熔岩免疫。",
+  "inmis.advancement.withered_backpack.title": "凋零的扩张",
+  "inmis.advancement.withered_backpack.description": "用凋零获得的掉落物来增强你闪亮的背包。",
+  "inmis.advancement.endless_backpack.title": "结束",
+  "inmis.advancement.endless_backpack.description": "获得由终级力量驱动的终极背包。",
 
   "category.inmis.keybindings": "Inmis",
   "key.inmis.open_backpack": "打开背包"
