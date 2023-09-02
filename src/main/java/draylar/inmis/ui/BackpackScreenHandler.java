@@ -19,6 +19,8 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class BackpackScreenHandler extends ScreenHandler {
 
@@ -154,9 +156,18 @@ public class BackpackScreenHandler extends ScreenHandler {
                 }
             }
 
+
+            Item item = stack.getItem();
+            // Check blacklist
+            if(inventory instanceof BackpackInventory && 
+                    Inmis.CONFIG.blacklist.stream()
+                    .map(Identifier::new)
+                    .toList()
+                    .contains(Registry.ITEM.getId(item))) {
+                return false;
+            }
             // Do not allow players to insert shulkers into backpacks.
             if(Inmis.CONFIG.disableShulkers && inventory instanceof BackpackInventory) {
-                Item item = stack.getItem();
                 if(item instanceof BlockItem blockItem) {
                     return !(blockItem.getBlock() instanceof ShulkerBoxBlock);
                 }

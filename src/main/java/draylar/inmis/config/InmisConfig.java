@@ -5,6 +5,7 @@ import draylar.omegaconfig.api.Config;
 import draylar.omegaconfig.api.Syncing;
 import net.minecraft.sound.SoundEvents;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class InmisConfig implements Config {
 
     @Comment(value = "Whether Shulker Boxes should be blacklisted from being placed inside Inmis Backpacks.")
     public boolean disableShulkers = true;
+
+    @Comment(value = "Backpack blacklist array")
+    public List<String> blacklist = new ArrayList<>();
 
     @Comment(value = "Whether Backpacks should play a sound when opened.")
     public boolean playSound = true;
