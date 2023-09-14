@@ -12,11 +12,8 @@ import org.lwjgl.glfw.GLFW;
 
 public class InmisKeybinds {
 
-    private static final KeyBinding OPEN_BACKPACK = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-            "key.inmis.open_backpack",
-            InputUtil.Type.KEYSYM,
-            GLFW.GLFW_KEY_B,
-            "category.inmis.keybindings"));
+    private static final KeyBinding OPEN_BACKPACK = KeyBindingHelper
+            .registerKeyBinding(new KeyBinding("key.inmis.open_backpack", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_B, "category.inmis.keybindings"));
 
     public static void initialize() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

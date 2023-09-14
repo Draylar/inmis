@@ -4,9 +4,9 @@ import com.misterpemodder.shulkerboxtooltip.api.PreviewContext;
 import com.misterpemodder.shulkerboxtooltip.api.provider.PreviewProvider;
 import draylar.inmis.config.BackpackInfo;
 import draylar.inmis.item.BackpackItem;
-import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.collection.DefaultedList;
 
@@ -21,9 +21,9 @@ public class InmisPreviewProvider implements PreviewProvider {
 
     @Override
     public List<ItemStack> getInventory(PreviewContext context) {
-        BackpackInfo info = ((BackpackItem) context.getStack().getItem()).getTier();
+        BackpackInfo info = ((BackpackItem) context.stack().getItem()).getTier();
         List<ItemStack> stacks = DefaultedList.ofSize(info.getNumberOfRows() * info.getRowWidth(), ItemStack.EMPTY);
-        NbtList inventoryTag = context.getStack().getOrCreateNbt().getList("Inventory", NbtType.COMPOUND);
+        NbtList inventoryTag = context.stack().getOrCreateNbt().getList("Inventory", NbtElement.COMPOUND_TYPE);
 
         inventoryTag.forEach(element -> {
             NbtCompound stackTag = (NbtCompound) element;
@@ -42,6 +42,6 @@ public class InmisPreviewProvider implements PreviewProvider {
 
     @Override
     public int getMaxRowSize(PreviewContext context) {
-        return ((BackpackItem) context.getStack().getItem()).getTier().getRowWidth();
+        return ((BackpackItem) context.stack().getItem()).getTier().getRowWidth();
     }
 }

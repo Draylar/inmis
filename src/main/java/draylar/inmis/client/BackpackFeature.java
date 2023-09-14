@@ -8,11 +8,11 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 
 public class BackpackFeature extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
@@ -21,22 +21,23 @@ public class BackpackFeature extends FeatureRenderer<AbstractClientPlayerEntity,
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
+    public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, float limbAngle, float limbDistance, float tickDelta,
+            float animationProgress, float headYaw, float headPitch) {
         ItemStack chestSlot = player.getEquippedStack(EquipmentSlot.CHEST);
-        if(chestSlot.getItem() instanceof BackpackItem) {
+        if (chestSlot.getItem() instanceof BackpackItem) {
             matrices.push();
 
             // Initial transformation
-            matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180));
+            matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
             matrices.translate(0, -0.2, -0.25);
 
             // Shifting
-            if(player.isSneaking()) {
-                matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(25));
+            if (player.isSneaking()) {
+                matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(25));
                 matrices.translate(0, -0.2, 0);
             }
 
-            MinecraftClient.getInstance().getItemRenderer().renderItem(chestSlot, ModelTransformation.Mode.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, 0);
+            MinecraftClient.getInstance().getItemRenderer().renderItem(chestSlot, ModelTransformationMode.FIXED, light, OverlayTexture.DEFAULT_UV, matrices, vertexConsumers, player.getWorld(), 0);
             matrices.pop();
         }
     }

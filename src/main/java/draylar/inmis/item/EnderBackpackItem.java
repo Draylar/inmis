@@ -20,14 +20,14 @@ public class EnderBackpackItem extends Item {
     public static final Text CONTAINER_NAME = Text.translatable("container.enderchest");
 
     public EnderBackpackItem() {
-        super(new Item.Settings().group(Inmis.GROUP).maxCount(1));
+        super(new Item.Settings().maxCount(1));
     }
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         EnderChestInventory enderChestInventory = player.getEnderChestInventory();
 
-        if(Inmis.CONFIG.playSound) {
+        if (Inmis.CONFIG.playSound) {
             if (world.isClient) {
                 world.playSound(player, player.getBlockPos(), SoundEvents.BLOCK_ENDER_CHEST_OPEN, SoundCategory.PLAYERS, 1, 1);
             }
@@ -35,8 +35,8 @@ public class EnderBackpackItem extends Item {
 
         if (enderChestInventory != null) {
             if (!world.isClient) {
-                player.openHandledScreen(new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) ->
-                        GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory), CONTAINER_NAME));
+                player.openHandledScreen(new SimpleNamedScreenHandlerFactory(
+                        (i, playerInventory, playerEntity) -> GenericContainerScreenHandler.createGeneric9x3(i, playerInventory, enderChestInventory), CONTAINER_NAME));
 
                 player.incrementStat(Stats.OPEN_ENDERCHEST);
             }
