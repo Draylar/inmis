@@ -1,0 +1,39 @@
+{
+  "itemGroup.inmis.backpack": "Inmis",
+
+  "ui.inmis.backpack": "鞄",
+
+  "item.inmis.baby_backpack": "小さな鞄",
+  "item.inmis.ender_pouch": "エンダーポーチ",
+
+  "item.inmis.frayed_backpack": "解れた鞄",
+  "item.inmis.plated_backpack": "鍍金した鞄",
+  "item.inmis.gilded_backpack": "金箔した鞄",
+  "item.inmis.bejeweled_backpack": "宝飾した鞄",
+  "item.inmis.blazing_backpack": "ネザーの鞄",
+  "item.inmis.withered_backpack": "ウィザーの鞄",
+  "item.inmis.endless_backpack": "エンドの鞄",
+
+  "inmis.advancement.baby_backpack.title": "ココロバカリの贈り物",
+  "inmis.advancement.baby_backpack.description": "小さな鞄を作る。ちょっとした手土産に最適だ。",
+  "inmis.advancement.ender_pouch.title": "エンドに手を伸ばす",
+  "inmis.advancement.ender_pouch.description": "エンダーポーチを作ってエンダーチェストの中に手を伸ばす。",
+
+  "inmis.advancement.frayed_backpack.title": "鞄職人の見習い",
+  "inmis.advancement.frayed_backpack.description": "誰でも初めはここから。解れた鞄を作ってインベントリを拡張する。",
+  "inmis.advancement.plated_backpack.title": "鍍金りと大きく",
+  "inmis.advancement.plated_backpack.description": "解れた鞄を鉄で鍍金して鞄を大きくする。",
+  "inmis.advancement.gilded_backpack.title": "金ぴ鞄",
+  "inmis.advancement.gilded_backpack.description": "鍍金した鞄に金箔を施して眩しい存在になる。",
+  "inmis.advancement.bejeweled_backpack.title": "ダイヤモンドとかで鞄を覆って",
+  "inmis.advancement.bejeweled_backpack.description": "金箔した鞄に貴重な宝石を嵌め込んで輝かしい性能を手に入れる。",
+  "inmis.advancement.blazing_backpack.title": "地獄のような鞄強化作業",
+  "inmis.advancement.blazing_backpack.description": "宝飾した鞄をネザライトで強化して炎と熔岩に耐性を付ける。",
+  "inmis.advancement.withered_backpack.title": "弱ったな，まだ上の鞄がある",
+  "inmis.advancement.withered_backpack.description": "ウィザーを討伐して宝飾した鞄を増強する。",
+  "inmis.advancement.endless_backpack.title": "おしまいの鞄",
+  "inmis.advancement.endless_backpack.description": "エンドで手に入る究極の素材を使って究極の鞄を作る。",
+
+  "category.inmis.keybindings": "Inmis",
+  "key.inmis.open_backpack": "鞄を開く"
+}
