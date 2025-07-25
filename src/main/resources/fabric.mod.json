@@ -29,6 +29,7 @@
     "inmis.mixins.json",
     "inmis.trinkets.mixins.json"
   ],
+  "accessWidener": "inmis.accesswidener",
   "depends": {
     "java": ">=21",
     "minecraft": ">=${minecraft_version}",

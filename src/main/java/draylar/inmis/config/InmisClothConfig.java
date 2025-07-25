@@ -45,6 +45,8 @@ public class InmisClothConfig implements ConfigData {
     @Comment("If this value is set to false, players will not be able to equip or open backpacks in a Trinkets slot.")
     public boolean enableTrinketCompatibility = true;
 
+    @Comment(value = "If true, players will not be able to take backpacks out of armor/trinket slots if the backpack is not empty.")
+    public boolean requireEmptyForUnequip = false;
 
     @Comment("If true, backpacks in armor/trinket slots will empty out into the world (scatter contents) when the player dies.")
     public boolean spillArmorBackpacksOnDeath = false;
