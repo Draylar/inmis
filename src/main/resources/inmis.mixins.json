@@ -3,12 +3,13 @@
   "package": "draylar.inmis.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ArmorSlotMixin",
     "PlayerDropMixin",
     "ShapedRecipeMixin"
   ],
   "client": [
-    "client.PlayerEntityFeatureMixin",
-    "client.ItemStackMixin"
+    "client.ItemStackMixin",
+    "client.PlayerEntityFeatureMixin"
   ],
   "injectors": {
     "defaultRequire": 1
